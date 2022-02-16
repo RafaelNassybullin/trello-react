@@ -1,18 +1,6 @@
-import React, { FC } from 'react';
 import styled from "styled-components";
-import { IModalPopupProps } from "../types";
 
-export const ModalPopup: FC<IModalPopupProps> = ({children}) => {
-  return (
-    <Overlay>
-      <Popup>
-        {children}
-      </Popup>
-    </Overlay>
-  )
-}
-
-const Overlay = styled.div`
+export const Overlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -22,7 +10,7 @@ const Overlay = styled.div`
   display: grid;
   place-items: center;
 `
-const Popup = styled.div`
+export const Popup = styled.div`
   position: relative;
   padding: 20px 30px;
   display: grid;
