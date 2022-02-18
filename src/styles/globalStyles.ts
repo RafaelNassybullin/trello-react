@@ -9,6 +9,10 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
+  *::selection{
+    background: palegreen;
+    
+  }
   body {
     font-size: 16px;
     height: 100vh;

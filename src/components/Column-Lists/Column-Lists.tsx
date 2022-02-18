@@ -16,11 +16,16 @@ import {InputListTitle} from "../Input-List-Title/Input-List-Title";
 // @ts-ignore
 import {ReactComponent as ThreeDotsICON} from "../../assets/icons/three-dots.svg";
 
-
 export const ColumnLists: FC<IColumnListsProps> = () => {
-  const [data, setData] = useState<IData[]>(listsData)
-  const [addCard, setAddCard] = useState<boolean>(false)
+
   const authorName: string | null = localStorage.getItem('name');
+  const [data, setData] = useState<IData[]>(listsData)
+  const [addCard, setAddCard] = useState<boolean>(false)/////////в отдельный компонент
+  const fu = (j:any, k:string) => listsData.map(el => el.id === j.id && k!=='' ? el.listTitle = k : null)
+
+
+  //переименовать тестовые названия и добавить типизацию
+
 
   return (
     <>
@@ -28,20 +33,18 @@ export const ColumnLists: FC<IColumnListsProps> = () => {
         authorName &&
         <>
           <AuthorTitle>{authorName}</AuthorTitle>
+
           <ListWrap>
 
             {data.map((el) =>
 
-              <List>
+              <List>{/*///////////////////////////////////////////в отдельный компонент*/}
                 <ListTitleWrap>
-                  <InputListTitle listTitleData={el.listTitle}/>
+                  <InputListTitle listTitleData={el} clbkTest={fu}/>
                   <ListMenu><ThreeDotsICON/></ListMenu>
                 </ListTitleWrap>
-
                 {el.cards.map(el=><Card><p>{el.cardTitle}</p></Card>)}
-
                 {addCard&&<input type="text"/>}
-
                 <ListButton onClick={()=>setAddCard(!addCard)}>+ Add a card...</ListButton>
               </List>
 

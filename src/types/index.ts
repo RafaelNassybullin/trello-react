@@ -1,17 +1,16 @@
+export interface IMainDescProps {}
+export interface IModalPopupProps {}
+export interface IColumnListsProps {}
 
 export interface IYourNameInputProps {
   modalCallback:(name:string)=>void
 }
-export interface IMainDescProps {}
-export interface IModalPopupProps {}
-export interface IColumnListsProps {}
 export interface IInputListTitleProps {
-  listTitleData:string
+  listTitleData:IData
+  clbkTest:(h:IData, titleValue:string)=>void
 }
-
-
-//cards
-interface ICards {
+//list & cards
+export interface ICards {
   id: string
   cardTitle: string
   cardDescription: string
