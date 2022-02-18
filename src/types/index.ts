@@ -1,20 +1,30 @@
-export interface IMainDescProps {}
-export interface IModalPopupProps {}
-export interface IColumnListsProps {}
+export interface IMainDescProps {
+}
+
+export interface IModalPopupProps {
+}
+
+export interface IColumnListsProps {
+}
 
 export interface IYourNameInputProps {
-  modalCallback:(name:string)=>void
+  modalCallback: (name: string) => void
 }
+
 export interface IInputListTitleProps {
-  listTitleData:IData
-  clbkTest:(h:IData, titleValue:string)=>void
+  listTitleData: IData
+  listTitleClbck: (listTitleParam: IData, titleValue: string) => void
 }
+
 export interface IListsProps {
-  listsDataProps:IData
+  listsDataProps: IData
+  addCardClbkProps: (cardsParam: ICards, listsParam: IData) => void
 }
+
 export interface ICardsProps {
-  cardsDataProps:any
+  cardsDataProps: IData
 }
+
 
 //list & cards
 export interface ICards {
@@ -23,6 +33,7 @@ export interface ICards {
   cardDescription: string
   cardComment: string
 }
+
 export interface IData {
   id: string
   listTitle: string

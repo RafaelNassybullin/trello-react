@@ -2,14 +2,14 @@ import React, {FC, SyntheticEvent, useState} from 'react';
 import {IInputListTitleProps} from "../../types";
 import {ListTitleInput, ListTitleChange, ListTitle} from './Input-List-Title.styled';
 
-export const InputListTitle: FC<IInputListTitleProps> = ({listTitleData, clbkTest}) => {
+export const InputListTitle: FC<IInputListTitleProps> = ({listTitleData, listTitleClbck}) => {
   const [titleOpen, setTitleOpen] = useState<boolean>(false)
   const [titleValue, setTitleValue] = useState<string>(listTitleData.listTitle)
 
   const listTitleHandler = (e: SyntheticEvent) => {
     e.preventDefault()
     setTitleOpen(!titleOpen);
-    clbkTest(listTitleData, titleValue)
+    listTitleClbck(listTitleData, titleValue)
     setTitleValue(listTitleData.listTitle)
   }
 

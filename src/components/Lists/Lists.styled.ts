@@ -16,18 +16,12 @@ export const ListButton = styled.button`
   left: 5px;
   outline: none;
   border: none;
-  background: transparent;
   color: gray;
   font-size: 16px;
   margin-top: 20px;
   cursor: pointer;
   padding: 3px 10px;
   border-radius: 3px;
-
-  &:hover {
-    color: white;
-    background: #A470FE;
-  }
 `
 export const ListMenu = styled.div`
   width: 30px;
@@ -48,4 +42,13 @@ export const ListTitleWrap = styled.div`
   display:flex;
   align-items:center;
   justify-content:space-between;
+`
+
+export const InputAddCard = styled.input`
+  width: 100%;
+  font-size: 16px;
+  height: 30px;
+  border-radius: 3px;
+  outline: none;
+  border: 2px solid rgba(0,152,155,1);
 `

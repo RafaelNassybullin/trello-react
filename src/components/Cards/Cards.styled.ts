@@ -15,3 +15,6 @@ export const Card = styled.div`
     color: white;
   }
 `
+export const CardText = styled.p`
+
+`

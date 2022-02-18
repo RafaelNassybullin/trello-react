@@ -1,13 +1,16 @@
 import React, {FC} from 'react';
-import {ICardsProps} from "../../types";
-import { Card } from './Cards.styled';
+import {ICards, ICardsProps} from "../../types";
+import {Card, CardText} from './Cards.styled';
 
 export const Cards: FC<ICardsProps> = ({cardsDataProps}) => {
   return (
     <>
-      <Card>
-        <p>{cardsDataProps.cardTitle}</p>
-      </Card>
+      {
+        cardsDataProps.cards.map((el: ICards) =>
+          <Card onClick={() => console.log(cardsDataProps, el)}>
+            <CardText>{el.cardTitle}</CardText>
+          </Card>)
+      }
     </>
   )
 }

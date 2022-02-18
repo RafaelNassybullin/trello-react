@@ -1,35 +1,75 @@
-import React, { FC, useState } from 'react';
-import { IListsProps } from "../../types";
-import { InputListTitle } from "../Input-List-Title/Input-List-Title";
-import { List , ListTitleWrap, ListMenu, ListButton} from './Lists.styled';
-import { listsData } from "../../store";
-
+import React, {FC, SyntheticEvent, useState} from 'react';
+import {IData, IListsProps} from "../../types";
+import {InputListTitle} from "../Input-List-Title/Input-List-Title";
+import {List, ListTitleWrap, ListMenu, ListButton, InputAddCard} from './Lists.styled';
+import {listsData} from "../../store";
+import {Cards} from "../Cards/Cards";
 // @ts-ignore
 import {ReactComponent as ThreeDotsICON} from "../../assets/icons/three-dots.svg";
-import {Cards} from "../Cards/Cards";
 
-export const Lists:FC<IListsProps> = ({listsDataProps}) => {
 
-    const [addCard, setAddCard] = useState<boolean>(false)
-    const fu = (j:any, k:string) => listsData.map((el) => el.id === j.id && k!=='' ? el.listTitle = k : null)
+export const Lists: FC<IListsProps> = ({listsDataProps, addCardClbkProps}) => {
 
-    return (
-        <>
-            <List>{/*список*/}
+  const [addCardOpen, setAddCardOpen] = useState<boolean>(false)
+  const [cardTextValue, setCardTextValue] = useState<string>('')
 
-                <ListTitleWrap>{/*Контейнер заголовка списка*/}
-                  <InputListTitle listTitleData={listsDataProps} clbkTest={fu}/>{/*Логика меняющая инпуты, данные, калбек изменения данных*/}
-                  <ListMenu>{/*Враппер для меню три точки*/}
-                    <ThreeDotsICON/>{/*Иконка SVGR меню три точки, верни мой SVGR TypeScript...*/}
-                  </ListMenu>
-                </ListTitleWrap>
+  const listTitleClbck = (listDataArg: IData, listValue: string) => listsData
+    .map((el) => el.id === listDataArg.id && listValue !== ''
+      ? el.listTitle = listValue
+      : null)
+  ///////////////////////////////////////////////////////////////////////////// в компонент(
+  const addCardHandler = (e: SyntheticEvent) => {
+    e.preventDefault()
+    addCardClbkProps({
+      id: 'card-kjnn1-3',
+      cardTitle: cardTextValue,
+      cardDescription: 'Описание',
+      cardComment: 'Комментарий'
+    }, listsDataProps)
+    setCardTextValue('')
+  }
+/////////////////////////////////////////////////////////////////////////////////// )в компонент
+  return (
+    <>
+      <List>{/*список*/}
 
-                {listsDataProps.cards.map((el)=><Cards cardsDataProps={el}/>)}{/*Карточки*/}
+        <ListTitleWrap>{/*Контейнер заголовка списка*/}
+          <InputListTitle
+            listTitleData={listsDataProps}
+            listTitleClbck={listTitleClbck}
+          />{/*Логика меняющая инпуты, данные, калбек изменения данных*/}
+          <ListMenu>{/*Враппер для меню три точки*/}
+            <ThreeDotsICON/>{/*Иконка SVGR меню три точки, где SVGR TypeScript?...*/}
+          </ListMenu>
+        </ListTitleWrap>
 
-                {addCard&&<input type="text"/>}
-                <ListButton onClick={()=>setAddCard(!addCard)}>+ Add a card...</ListButton>
+        <Cards cardsDataProps={listsDataProps}/>{/*Карточки*/}
 
-              </List>
-        </>
-    )
+        {/*///////////////////////////////////////////////////////////////////////////// в компонент(*/}
+        <form onSubmit={addCardHandler}>
+          {
+            addCardOpen &&
+            <InputAddCard
+              autoFocus
+              value={cardTextValue}
+              onChange={e => setCardTextValue(e.target.value)}
+              onBlur={(e) => (addCardHandler(e), setAddCardOpen(false))}
+              type="text"/>
+          }
+          <ListButton
+            onClick={() => setAddCardOpen(!addCardOpen)}
+            style={{
+              background: addCardOpen ? '#A470FE' : 'transparent',
+              color: addCardOpen ? 'white' : 'gray'
+            }}
+            type={'button'}>
+            + Add a card...
+          </ListButton>
+        </form>
+        {/*///////////////////////////////////////////////////////////////////////////// )в компонент*/}
+
+
+      </List>
+    </>
+  )
 }
