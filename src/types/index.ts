@@ -9,6 +9,13 @@ export interface IInputListTitleProps {
   listTitleData:IData
   clbkTest:(h:IData, titleValue:string)=>void
 }
+export interface IListsProps {
+  listsDataProps:IData
+}
+export interface ICardsProps {
+  cardsDataProps:any
+}
+
 //list & cards
 export interface ICards {
   id: string
@@ -21,3 +28,4 @@ export interface IData {
   listTitle: string
   cards: ICards[]
 }
+
