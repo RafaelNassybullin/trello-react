@@ -1,10 +1,11 @@
 import React, {FC, useState} from "react";
-import {ColumnLists} from "../Column-Lists/Column-Lists";
-import {ModalPopup} from "../Modal-Popup/Modal-Popup";
-import {YourNameInput} from "../Your-Name-Input/Your-Name-Input";
-import {IMainDescProps} from "../../types";
+import {ColumnLists} from "./Column-Lists";
+import {ModalPopup} from "./Modal-Popup";
+import {YourNameInput} from "./Your-Name-Input";
 
-export const MainBoard: FC<IMainDescProps> = () => {
+interface props {}
+
+export const MainBoard: FC<props> = () => {
   const [showModal, setShowModal] = useState<string>('')
   const modalCallback = (name:string) => setShowModal(name)
 

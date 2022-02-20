@@ -1,4 +1,4 @@
-import {IData} from "../types";
+import {IData} from "../interfaces";
 
 export const listsData: IData[] = [
   {

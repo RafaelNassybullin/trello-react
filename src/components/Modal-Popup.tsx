@@ -1,6 +1,20 @@
+import React, {FC} from 'react';
 import styled from "styled-components";
 
-export const Overlay = styled.div`
+export interface props {
+}
+
+export const ModalPopup: FC<props> = ({children}) => {
+  return (
+    <Overlay>
+      <Popup>
+        {children}
+      </Popup>
+    </Overlay>
+  )
+}
+
+const Overlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -10,7 +24,7 @@ export const Overlay = styled.div`
   display: grid;
   place-items: center;
 `
-export const Popup = styled.div`
+const Popup = styled.div`
   position: relative;
   padding: 20px 30px;
   display: grid;
