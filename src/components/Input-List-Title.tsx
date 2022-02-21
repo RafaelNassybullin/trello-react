@@ -12,7 +12,6 @@ export const InputListTitle: FC<props> = ({listTitleData}) => {
 
   const [titleOpen, setTitleOpen] = useState<boolean>(false)
   const [titleValue, setTitleValue] = useState<string>(listTitleData.listTitle)
-
   const {changeListTitle} = useContext(DataContext);
 
   const listTitleHandler = (e: SyntheticEvent) => {

@@ -1,20 +1,38 @@
-import React, {FC} from 'react';
+import React, {FC, useContext, useState} from 'react';
 import {v4 as uuidv4} from 'uuid';
 import {ICards, IData} from "../interfaces";
 import styled from "styled-components";
+import {CardDetailsModal} from "./Card-Details-Modal";
+import {DataContext} from "../context/DataContext";
 
 interface props {
   cardsDataProps: IData
 }
 
 export const Cards: FC<props> = ({cardsDataProps}) => {
+  const [state, setState] = useState<boolean>(false)
+  const {openModal} = useContext(DataContext);
+
+  const handleCard = (el:ICards, cardsDataProps:IData) => {
+    setState(!state)
+    openModal(el, true)
+  }
+
   return (
     <>
       {
-        cardsDataProps.cards.map((el: ICards) =>
-          <Card key={uuidv4()} onClick={() => console.log(cardsDataProps, el)}>
-            <CardText>{el.cardTitle}</CardText>
-          </Card>)
+        cardsDataProps.cards.map((el: ICards) => (
+          <React.Fragment key={uuidv4()}>
+            <Card onClick={()=>handleCard(el, cardsDataProps)}>
+              <CardText>{el.cardTitle}</CardText>
+            </Card>
+
+           <CardDetailsModal
+             lkl={state}
+              c={el}
+              h={cardsDataProps}/>
+          </React.Fragment>
+        ))
       }
     </>
   )

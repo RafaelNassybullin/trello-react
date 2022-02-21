@@ -5,6 +5,9 @@ export interface props {
 }
 
 export const ModalPopup: FC<props> = ({children}) => {
+
+
+
   return (
     <Overlay>
       <Popup>
@@ -23,6 +26,7 @@ const Overlay = styled.div`
   background: rgb(0, 0, 0, 0.4);
   display: grid;
   place-items: center;
+  z-index: 25;
 `
 const Popup = styled.div`
   position: relative;

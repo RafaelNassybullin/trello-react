@@ -6,6 +6,7 @@ export type DataContextProps = {
   addLiss:(list:IData)=>void
   changeListTitle:( id:string, value:string )=>void
   addCards:(card:ICards, list:IData)=>void
+  openModal:(card:ICards,list:boolean)=>void
 }
 export const DataContext = createContext<DataContextProps>({} as DataContextProps)
 

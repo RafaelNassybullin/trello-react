@@ -1,30 +1,20 @@
 import React, {FC, useContext} from 'react';
 import styled from "styled-components";
-import {DataContext} from "../context/DataContext";
-import {v4 as uuidv4} from "uuid";
+import { DataContext } from "../context/DataContext";
+import { v4 as uuidv4 } from "uuid";
 
 interface props {
 
 }
 
 export const AddList: FC<props> = () => {
-  const {addLiss, dataState} = useContext(DataContext)
 
-  const handlerAddList = () => {
-    addLiss({
-      id: uuidv4(),
-      listTitle: 'New List',
-      cards: []
-    })
-    console.log(dataState.datass);
-  }
+  const { addLiss } = useContext(DataContext)
+
+  const handlerAddList = () => addLiss({ id: uuidv4(), listTitle: 'New List', cards: [] })
 
   return (
-    <>
-      <AddListBtn onClick={handlerAddList}>
-        + Add a list...
-      </AddListBtn>
-    </>
+      <AddListBtn onClick={handlerAddList}>+ Add a list...</AddListBtn>
   )
 }
 
