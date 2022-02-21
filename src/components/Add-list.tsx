@@ -1,13 +1,29 @@
-import React, {FC} from 'react';
+import React, {FC, useContext} from 'react';
 import styled from "styled-components";
+import {DataContext} from "../context/DataContext";
+import {v4 as uuidv4} from "uuid";
 
 interface props {
 
 }
+
 export const AddList: FC<props> = () => {
+  const {addLiss, dataState} = useContext(DataContext)
+
+  const handlerAddList = () => {
+    addLiss({
+      id: uuidv4(),
+      listTitle: 'New List',
+      cards: []
+    })
+    console.log(dataState.datass);
+  }
+
   return (
     <>
-      <AddListBtn>+ Add a list...</AddListBtn>{/*Добавить список*/}
+      <AddListBtn onClick={handlerAddList}>
+        + Add a list...
+      </AddListBtn>
     </>
   )
 }
@@ -25,7 +41,8 @@ const AddListBtn = styled.button`
   padding: 0 15px;
   background: rgba(255, 255, 255, 0.2);
   cursor: pointer;
-  &:hover{
+
+  &:hover {
     background: rgba(255, 255, 255, 0.4);
   }
 `

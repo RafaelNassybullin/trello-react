@@ -8,6 +8,7 @@ import {Cards} from "./Cards";
 // @ts-ignore
 import {ReactComponent as ThreeDotsICON} from "../assets/icons/three-dots.svg";
 import styled from "styled-components";
+import {DataContext} from "../context/DataContext";
 
 interface props {
   listsDataProps: IData
@@ -16,40 +17,34 @@ interface props {
 export const Lists: FC<props> = ({listsDataProps}) => {
   const [addCardOpen, setAddCardOpen] = useState<boolean>(false);
   const [cardTextValue, setCardTextValue] = useState<string>('')
-
-  const listTitleClbck = (listDataArg: IData, listValue: string) => listsData
-    .map((el) => el.id === listDataArg.id && listValue !== ''
-      ? el.listTitle = listValue
-      : null)
-
-  const addCardClbk = (cardsArg: ICards, listArg: IData) => {
-    cardsArg.cardTitle && listsData.map((el: IData) => el.id === listArg.id
-      ? el.cards.push(cardsArg)
-      : null)
-  }
+  const {addCards} = useContext(DataContext);
 
   const addCardHandler = (e: SyntheticEvent) => {
     e.preventDefault()
-    addCardClbk({
-      id: uuidv4(),
-      cardTitle: cardTextValue,
-      cardDescription: 'Описание',
-      cardComment: 'Комментарий'
-    }, listsDataProps)
+    if (cardTextValue) {
+      addCards({
+        id: uuidv4(),
+        cardTitle: cardTextValue,
+        cardDescription: 'Описание',
+        cardComment: 'Комментарий'
+      }, listsDataProps)
+    }
     setCardTextValue('')
   }
 
   return (
     <>
-      <List>{/*список*/}
-        <ListTitleWrap>{/*Контейнер заголовка списка*/}
+      <List>
+        <ListTitleWrap>
           <InputListTitle
             listTitleData={listsDataProps}
-            listTitleClbck={listTitleClbck}
-          />{/*Логика меняющая инпуты, данные, калбек изменения данных*/}
-          <ListMenu>{/*Враппер для меню три точки*/}
-            <ThreeDotsICON/>{/*Иконка SVGR меню три точки, где SVGR TypeScript?...*/}
+          />
+
+
+          <ListMenu>
+            <ThreeDotsICON/>
           </ListMenu>
+
         </ListTitleWrap>
         <Cards cardsDataProps={listsDataProps}/>{/*Карточки*/}
 
@@ -110,18 +105,20 @@ const ListMenu = styled.div`
   place-items: center;
   border-radius: 7px;
   cursor: pointer;
-  &:hover{
+
+  &:hover {
     background: #CCCCCC;
   }
-  svg{
+
+  svg {
     width: 15px;
   }
 `
 const ListTitleWrap = styled.div`
   width: 100%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `
 
 const InputAddCard = styled.input`
@@ -130,5 +127,5 @@ const InputAddCard = styled.input`
   height: 30px;
   border-radius: 3px;
   outline: none;
-  border: 2px solid rgba(0,152,155,1);
+  border: 2px solid rgba(0, 152, 155, 1);
 `

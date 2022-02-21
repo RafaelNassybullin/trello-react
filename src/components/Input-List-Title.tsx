@@ -1,32 +1,39 @@
-import React, {FC, SyntheticEvent, useState} from 'react';
+import React, {FC, SyntheticEvent, useContext, useState} from 'react';
 import {IData} from "../interfaces";
 import styled from "styled-components";
+import {DataContext} from "../context/DataContext";
 
 
 interface props {
   listTitleData: IData
-  listTitleClbck: (listTitleParam: IData, titleValue: string) => void
 }
 
-export const InputListTitle: FC<props> = ({listTitleData, listTitleClbck}) => {
+export const InputListTitle: FC<props> = ({listTitleData}) => {
+
   const [titleOpen, setTitleOpen] = useState<boolean>(false)
   const [titleValue, setTitleValue] = useState<string>(listTitleData.listTitle)
+
+  const {changeListTitle} = useContext(DataContext);
 
   const listTitleHandler = (e: SyntheticEvent) => {
     e.preventDefault()
     setTitleOpen(!titleOpen);
-    listTitleClbck(listTitleData, titleValue)
     setTitleValue(listTitleData.listTitle)
+  }
+
+  const handley = (e: SyntheticEvent) => {
+    e.preventDefault()
+    changeListTitle(listTitleData.id, titleValue)
   }
 
   return (
     <>
-      <ListTitleChange onSubmit={listTitleHandler}>
+      <ListTitleChange onSubmit={handley}>
         {
           titleOpen
             ? <ListTitleInput
               autoFocus
-              onBlur={listTitleHandler}
+              onBlur={handley}
               onChange={(e) => (setTitleValue(e.target.value))}
               onFocus={e => e.target.select()}
               value={titleValue}

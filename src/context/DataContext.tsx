@@ -1,11 +1,11 @@
 import {createContext} from "react";
-import {IDataState} from "../interfaces";
+import {ICards, IData, IDataState} from "../interfaces";
 
 export type DataContextProps = {
   dataState:IDataState
-  // toggleTodo:(id:string)=>void
-  //функции для мутирования стейта из контекста
-
+  addLiss:(list:IData)=>void
+  changeListTitle:( id:string, value:string )=>void
+  addCards:(card:ICards, list:IData)=>void
 }
 export const DataContext = createContext<DataContextProps>({} as DataContextProps)
 
