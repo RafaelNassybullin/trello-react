@@ -6,7 +6,7 @@ export interface ICards {
   id: string
   cardTitle: string
   cardDescription: string
-  cardComment: string[]
+  cardComment: IComment[]
   modalOpen:boolean
 }
 
@@ -16,6 +16,8 @@ export interface IData {
   cards: ICards[]
 }
 
-
-
+export interface IComment {
+  id:string
+  commentText:string
+}
 

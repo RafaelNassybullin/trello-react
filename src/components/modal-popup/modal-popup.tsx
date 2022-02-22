@@ -5,9 +5,6 @@ export interface props {
 }
 
 export const ModalPopup: FC<props> = ({children}) => {
-
-
-
   return (
     <Overlay>
       <Popup>

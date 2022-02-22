@@ -2,7 +2,7 @@ import React, {useReducer} from 'react';
 import {DataContext} from "./DataContext";
 import { listsData } from "../store";
 import { DataReducer } from "./dataReducer";
-import { ICards, IData, IDataState } from '../interfaces';
+import { ICards, IData, IDataState, IComment } from '../interfaces';
 
 const INITIAL_STATE: IDataState = {
   datass:[...listsData]
@@ -23,9 +23,26 @@ export const DataProvider = ({ children }: props) => {
   const addCards = ( card:ICards, list:IData ) => {
     dispatch({type: 'ADD_CARD', payload: {card, list}})
   }
-
-  const openModal = ( card:ICards , list:boolean) => {
+  const openModal = ( card:ICards , list:boolean ) => {
     dispatch({type: 'OPEN_MODAL', payload: {card, list}})
+  }
+  const removeComment = (comment:IComment , list: IData, card:ICards) => {
+    dispatch({type: 'REMOVE_COMMENT', payload: {comment, list, card}})
+  }
+   const changeDescriptions = ( descriptionValue: string , list: IData, card: ICards) => {
+    dispatch({type: 'CHANGE_DESCRIPTIONS', payload: { descriptionValue , list, card }})
+  }
+   const changeCardTitles = ( titleValue:string, list: IData, card: ICards) => {
+    dispatch({type: 'CHANGE_CARD_TITLES', payload: { titleValue, list, card }})
+  }
+  const addComment = ( commentValue:IComment, list: IData, card: ICards) => {
+    dispatch({type: 'ADD_COMMENT', payload: { commentValue, list, card }})
+  }
+  const removeCard = ( card: ICards) => {
+    dispatch({type: 'REMOVE_CARD', payload: {  card }})
+  }
+  const removeList = ( list: IData) => {
+    dispatch({type: 'REMOVE_LIST', payload: {  list }})
   }
 
   return (
@@ -34,7 +51,13 @@ export const DataProvider = ({ children }: props) => {
       addLiss,
       changeListTitle,
       addCards,
-      openModal
+      openModal,
+      removeComment,
+      changeDescriptions,
+      changeCardTitles,
+      addComment,
+      removeCard,
+      removeList
     }}>
       {children}
     </DataContext.Provider>

@@ -1,7 +1,7 @@
 import React, {FC, SyntheticEvent, useContext, useState} from 'react';
-import {IData} from "../interfaces";
+import {IData} from "../../interfaces";
 import styled from "styled-components";
-import {DataContext} from "../context/DataContext";
+import {DataContext} from "../../context/DataContext";
 
 
 interface props {
@@ -20,19 +20,19 @@ export const InputListTitle: FC<props> = ({listTitleData}) => {
     setTitleValue(listTitleData.listTitle)
   }
 
-  const handley = (e: SyntheticEvent) => {
+  const titleChangeDispatchHandler = (e: SyntheticEvent) => {
     e.preventDefault()
     changeListTitle(listTitleData.id, titleValue)
   }
 
   return (
     <>
-      <ListTitleChange onSubmit={handley}>
+      <ListTitleChange onSubmit={titleChangeDispatchHandler}>
         {
           titleOpen
             ? <ListTitleInput
               autoFocus
-              onBlur={handley}
+              onBlur={titleChangeDispatchHandler}
               onChange={(e) => (setTitleValue(e.target.value))}
               onFocus={e => e.target.select()}
               value={titleValue}

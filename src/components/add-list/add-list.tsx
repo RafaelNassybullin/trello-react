@@ -1,6 +1,6 @@
 import React, {FC, useContext} from 'react';
 import styled from "styled-components";
-import { DataContext } from "../context/DataContext";
+import { DataContext } from "../../context/DataContext";
 import { v4 as uuidv4 } from "uuid";
 
 interface props {

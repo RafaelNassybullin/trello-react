@@ -1,32 +1,43 @@
-import React, {FC} from 'react';
-import { IData } from "../interfaces";
-import {InputListTitle} from "./Input-List-Title";
-import {Cards} from "./Cards";
+import React, {FC, useContext} from 'react';
+import { IData } from "../../interfaces";
+import {InputListTitle} from "../input-list-title";
+import {Cards} from "../card";
 import styled from "styled-components";
-
+import {AddCard} from "../add-card";
+import {DataContext} from "../../context/DataContext";
 // @ts-ignore
-import {ReactComponent as ThreeDotsICON} from "../assets/icons/three-dots.svg";
-import {AddCard} from "./Add-Card";
-
+import {ReactComponent as ThreeDotsICON} from "../../assets/icons/three-dots.svg";
 
 interface props {
   listsDataProps: IData
 }
 
 export const Lists: FC<props> = ({listsDataProps}) => {
+
+  const { removeList } = useContext(DataContext);
+
+  const removeHandler = () => {
+    removeList(listsDataProps)
+  }
+
   return (
     <>
       <List>
+
         <ListTitleWrap>
-          <InputListTitle
-            listTitleData={listsDataProps}
-          />
-          <ListMenu>
+
+          <InputListTitle listTitleData={listsDataProps}/>
+
+          <ListMenu onClick={removeHandler}>
             <ThreeDotsICON/>
           </ListMenu>
+
         </ListTitleWrap>
-        <Cards cardsDataProps={listsDataProps}/>{/*Карточки*/}
-        <AddCard jhbjhbjh={listsDataProps}/>
+
+        <Cards cardsDataProps={listsDataProps}/>
+
+        <AddCard listDataAddCardProps={listsDataProps}/>
+
       </List>
     </>
   )
@@ -53,7 +64,6 @@ const ListMenu = styled.div`
   &:hover {
     background: #CCCCCC;
   }
-
   svg {
     width: 15px;
   }

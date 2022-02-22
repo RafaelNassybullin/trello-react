@@ -1,9 +1,9 @@
 import React, {FC, useContext, useState} from 'react';
 import {v4 as uuidv4} from 'uuid';
-import {ICards, IData} from "../interfaces";
+import {ICards, IData} from "../../interfaces";
 import styled from "styled-components";
-import {CardDetailsModal} from "./Card-Details-Modal";
-import {DataContext} from "../context/DataContext";
+import {CardDetailsModal} from "../card-details-modal";
+import {DataContext} from "../../context/DataContext";
 
 interface props {
   cardsDataProps: IData
@@ -13,7 +13,7 @@ export const Cards: FC<props> = ({cardsDataProps}) => {
   const [state, setState] = useState<boolean>(false)
   const {openModal} = useContext(DataContext);
 
-  const handleCard = (el:ICards, cardsDataProps:IData) => {
+  const handleCard = (el:ICards) => {
     setState(!state)
     openModal(el, true)
   }
@@ -22,16 +22,23 @@ export const Cards: FC<props> = ({cardsDataProps}) => {
     <>
       {
         cardsDataProps.cards.map((el: ICards) => (
+
           <React.Fragment key={uuidv4()}>
-            <Card onClick={()=>handleCard(el, cardsDataProps)}>
+
+            <Card onClick={()=>handleCard(el)}>
+
               <CardText>{el.cardTitle}</CardText>
+
+              <p>{el.cardComment.length}</p>
+
             </Card>
 
            <CardDetailsModal
-             lkl={state}
-              c={el}
-              h={cardsDataProps}/>
+              cardProps={el}
+              listProps={cardsDataProps}/>
+
           </React.Fragment>
+
         ))
       }
     </>

@@ -1,8 +1,8 @@
 import React, {FC, useContext} from 'react';
 import {v4 as uuidv4} from 'uuid';
-import {Lists} from "./Lists";
-import {AddList} from "./Add-list";
-import {DataContext} from "../context/DataContext";
+import {Lists} from "../lists";
+import {AddList} from "../add-list";
+import {DataContext} from "../../context/DataContext";
 import styled from "styled-components";
 
 interface props {
@@ -12,7 +12,9 @@ interface props {
 export const ColumnLists: FC<props> = () => {
 
   const authorName: string | null = localStorage.getItem('name');
+
   const {dataState} = useContext(DataContext);
+
   const {datass} = dataState
 
   return (
@@ -23,7 +25,9 @@ export const ColumnLists: FC<props> = () => {
           <AuthorTitle>{authorName}</AuthorTitle>
           <ListWrap>
             {
-              datass.map((el) => <Lists key={uuidv4()} listsDataProps={el}/>)
+              datass.map((el) => <Lists
+                key={uuidv4()}
+                listsDataProps={el}/>)
             }
             <AddList/>
           </ListWrap>

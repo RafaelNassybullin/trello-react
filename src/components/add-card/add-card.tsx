@@ -1,13 +1,13 @@
 import React, {FC, SyntheticEvent, useContext, useState} from 'react';
-import {DataContext} from "../context/DataContext";
+import {DataContext} from "../../context/DataContext";
 import {v4 as uuidv4} from "uuid";
-import {IData} from "../interfaces";
+import {IData} from "../../interfaces";
 import styled from "styled-components";
 
 interface props {
-  jhbjhbjh:IData
+  listDataAddCardProps:IData
 }
-export const AddCard: FC<props> = ({jhbjhbjh}) => {
+export const AddCard: FC<props> = ({listDataAddCardProps}) => {
 
   const [addCardOpen, setAddCardOpen] = useState<boolean>(false);
 
@@ -22,11 +22,12 @@ export const AddCard: FC<props> = ({jhbjhbjh}) => {
         id: uuidv4(),
         cardTitle: cardTextValue,
         cardDescription: 'Описание',
-        cardComment: ['комментарий-1', 'комментарий-2'],
+        cardComment: [],
         modalOpen:false
-      }, jhbjhbjh)
+      }, listDataAddCardProps)
     }
     setCardTextValue('')
+    setAddCardOpen(false)
   }
 
   return (
@@ -34,21 +35,28 @@ export const AddCard: FC<props> = ({jhbjhbjh}) => {
       <form onSubmit={addCardHandler}>
         {
           addCardOpen &&
+
           <InputAddCard
             autoFocus
             value={cardTextValue}
             onChange={e => setCardTextValue(e.target.value)}
-            onBlur={(e) => (addCardHandler(e), setAddCardOpen(false))}
+            onBlur={addCardHandler}
             type="text"/>
+
         }
         <ListButton
+
           onClick={() => setAddCardOpen(!addCardOpen)}
+
           style={{
             background: addCardOpen ? '#A470FE' : 'transparent',
             color: addCardOpen ? 'white' : 'gray'
           }}
+
           type={'button'}>
+
           + Add a card...
+
         </ListButton>
       </form>
     </>

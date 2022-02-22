@@ -1,7 +1,7 @@
 import React, {FC, useState} from "react";
-import {ColumnLists} from "./Column-Lists";
-import {ModalPopup} from "./Modal-Popup";
-import {YourNameInput} from "./Your-Name-Input";
+import {ColumnLists} from "../column-lists";
+import {ModalPopup} from "../modal-popup";
+import {YourNameInput} from "../your-name-input";
 
 interface props {}
 
