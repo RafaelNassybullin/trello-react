@@ -54,7 +54,8 @@ const Card = styled.div`
   box-shadow: 0 0 7px #CCCCCC;
   padding: 8px;
   cursor: pointer;
-
+  display: flex;
+  justify-content: space-between;
   &:hover {
     background: #40E3B5;
     color: white;

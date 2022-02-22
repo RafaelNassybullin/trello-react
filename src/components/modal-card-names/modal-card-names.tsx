@@ -1,4 +1,4 @@
-import React, {FC, useContext, useState} from 'react';
+import React, {FC, SyntheticEvent, useContext, useState} from 'react';
 import styled from "styled-components";
 import {DataContext} from "../../context/DataContext";
 import {ICards, IData} from "../../interfaces";
@@ -16,31 +16,55 @@ export const ModalCardNames: FC<props> = ({modalTitleListData, modalTitleCardDat
 
   const {changeCardTitles} = useContext(DataContext);
 
-  const changeCardTitle = () => {
+  const changeCardTitle = (e: SyntheticEvent) => {
+    e.preventDefault()
     setcardTitleChangeOpen(!cardTitleChangeOpen)
-
     if (cardTitleValue) {
       changeCardTitles(cardTitleValue, modalTitleListData, modalTitleCardData)
     }
-
   }
 
   return (
-    <ModalCardName>
-
-      <h3 onClick={changeCardTitle}>Card name:</h3>
-
+    <ModalCardName onSubmit={changeCardTitle}>
+      <ModalCardNameTitleWrap>
+        <h3>Card name:</h3>
+        <ModalCardNameButton onClick={changeCardTitle}>change</ModalCardNameButton>
+      </ModalCardNameTitleWrap>
       {!cardTitleChangeOpen && <p>{modalTitleCardData.cardTitle}</p>}
-
       {cardTitleChangeOpen &&
-      <input type="text"
-             onChange={e => setCardTitleValue(e.target.value)}
-             onBlur={changeCardTitle}
-             autoFocus/>}
-
+      <ModalCardNameInput
+        type="text"
+        onBlur={changeCardTitle}
+        onChange={e => setCardTitleValue(e.target.value)}
+        autoFocus/>}
     </ModalCardName>
   )
 }
-const ModalCardName = styled.div`
+const ModalCardName = styled.form`
+  margin: 8px 0;
+`
+const ModalCardNameTitleWrap = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+const ModalCardNameButton = styled.button`
+  background: tomato;
+  color: white;
+  outline: none;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+`
+const ModalCardNameInput = styled.input`
+  width: 50%;
+  outline: none;
+  background: white;
+  border: 2px solid #CCCCCC;
+  border-radius: 3px;
+  height: 30px;
 
+  &:focus {
+    border: 1px solid seagreen;
+  }
 `

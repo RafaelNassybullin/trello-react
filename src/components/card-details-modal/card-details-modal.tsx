@@ -28,8 +28,10 @@ export const CardDetailsModal: FC<props> = ({listProps, cardProps}) => {
     <>
       {cardProps.modalOpen && <ModalPopup>
         <ModalInner>
-          <ModalTitle>Author Rafael, list name: {listProps.listTitle}</ModalTitle>
-
+          <ModalTitle>
+           <div>Author: <span>{localStorage.getItem('name')}</span></div>
+            <div>list name:<span>{listProps.listTitle}</span> </div>
+           </ModalTitle>
           <ModalClose onClick={closeHandler}/>
 
           <ModalCard>
@@ -83,10 +85,13 @@ const ModalClose = styled.div`
     background: rgba(219, 90, 76, 0.91);
   }
 `
-const ModalTitle = styled.h4`
-  display: flex;
-  align-items: center;
-  font-size: 28px;
+const ModalTitle = styled.div`
+  font-size: 20px;
+  span{
+    font-weight: 700;
+    font-size: 28px;
+  }
+  
 `
 const ModalCard = styled.div`
 
@@ -97,7 +102,7 @@ const DeleteCard = styled.div`
   right: 0;
   width: 30px;
   height: 30px;
-  background: crimson;
+  background: tomato;
   color: white;
   display: grid;
   place-items: center;

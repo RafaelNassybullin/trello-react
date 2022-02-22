@@ -94,7 +94,7 @@ export const DataReducer = (state: IDataState, action: DataAction): IDataState =
             if (el.id === action.payload.list.id) {
               el.cards.map((el) => {
                   if (el.id === action.payload.card.id)
-                    el.cardComment.push(action.payload.commentValue)
+                    el.cardComment.unshift(action.payload.commentValue)
                 }
               )
             }
