@@ -1,7 +1,7 @@
 import React, {FC, useContext} from 'react';
 import styled from "styled-components";
-import { DataContext } from "../../context/DataContext";
-import { v4 as uuidv4 } from "uuid";
+import {DataContext} from "../../context/DataContext";
+import {v4 as uuidv4} from "uuid";
 
 interface props {
 
@@ -9,12 +9,16 @@ interface props {
 
 export const AddList: FC<props> = () => {
 
-  const { addLiss } = useContext(DataContext)
+  const {addLiss, dataState} = useContext(DataContext)
+  const {datass} = dataState
 
-  const handlerAddList = () => addLiss({ id: uuidv4(), listTitle: 'New List', cards: [] })
+  const handlerAddList = () => {
+    addLiss({id: uuidv4(), listTitle: 'New List', cards: []})
+    localStorage.setItem('localData', JSON.stringify(datass))
+  }
 
   return (
-      <AddListBtn onClick={handlerAddList}>+ Add a list...</AddListBtn>
+    <AddListBtn onClick={handlerAddList}>+ Add a list...</AddListBtn>
   )
 }
 

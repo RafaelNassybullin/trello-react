@@ -49,41 +49,35 @@ export const ModalComments: FC<props> = ({commentsCardProps, commentsListProps})
       </CommentsAddWrap>
       <CommentsItemsWrap>
         {commentsCardProps.cardComment.map((el: IComment) =>
-
-        <CommentsItems key={uuidv4()}>
-
-          <CommentTitle>{el.commentText}</CommentTitle>
-
-          <RemoveComment onClick={() => addCommentsHandler(el)}>X</RemoveComment>
-
-        </CommentsItems>
-
-      )}
+          <CommentsItems key={uuidv4()}>
+            <CommentTitle>{el.commentText}</CommentTitle>
+            <RemoveComment onClick={() => addCommentsHandler(el)}>X</RemoveComment>
+          </CommentsItems>
+        )}
       </CommentsItemsWrap>
-
     </Comments>
   )
 }
 
 const Comments = styled.div`
- 
+
 `
 const CommentsTitle = styled.h2`
- margin-bottom: 15px;
+  margin-bottom: 15px;
 `
 const CommentsAddWrap = styled.div`
   display: flex;
 `
 const CommentsInput = styled.input`
   width: 100%;
-  height: 30px;
+  height: 40px;
   outline: none;
   border-radius: 3px;
   padding: 0 10px;
   border: 2px solid #CCCCCC;
-
+  font-size: 16px;
   &:focus {
-    border: 2px solid palegreen;
+    border: 2px solid gray;
   }
 `
 const CommentTitle = styled.div`
@@ -100,7 +94,7 @@ const CommentsItems = styled.div`
   margin: 5px 0;
 `
 const RemoveComment = styled.button`
-  background: tomato;
+  background: gray;
   color: white;
   border-radius: 50%;
   width: 20px;
@@ -112,7 +106,7 @@ const RemoveComment = styled.button`
 
 const AddComment = styled.button`
   outline: none;
-  background: tomato;
+  background: gray;
   color: white;
   border: none;
   cursor: pointer;
@@ -121,16 +115,15 @@ const AddComment = styled.button`
 const CommentsItemsWrap = styled.div`
   height: 160px;
   overflow-y: auto;
-  
-  &::-webkit-scrollbar {
-  overflow-y: scroll;
-  width: 7px;
-  
-}
 
-&::-webkit-scrollbar-thumb {
-  background-color: tomato;
-  border-radius: 15px;
-}
-  
+  &::-webkit-scrollbar {
+    overflow-y: scroll;
+    width: 7px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 15px;
+  }
+
 `

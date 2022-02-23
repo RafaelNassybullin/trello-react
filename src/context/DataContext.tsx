@@ -11,7 +11,7 @@ export type DataContextProps = {
   changeDescriptions:(descriptionValue: string , list: IData, card: ICards)=>void
   changeCardTitles:(titleValue:string, list: IData, card: ICards)=>void
   addComment:(commentValue:IComment, list: IData, card: ICards)=>void
-  removeCard:(card: ICards)=>void
+  removeCard:(list: IData, card: ICards)=>void
   removeList:(list: IData)=>void
 }
 export const DataContext = createContext<DataContextProps>({} as DataContextProps)

@@ -1,4 +1,4 @@
-import React, {FC, useContext} from 'react';
+import React, { FC, useContext } from 'react';
 import {ModalPopup} from "../modal-popup";
 import {ICards, IData} from "../../interfaces";
 import styled from "styled-components";
@@ -6,6 +6,10 @@ import {DataContext} from "../../context/DataContext";
 import {ModalCardNames} from "../modal-card-names";
 import {ModalCardDescriptions} from "../modal-card-descriptions";
 import {ModalComments} from "../modal-comments";
+import {RemoveCard} from "../remove-card/remove-card";
+//@ts-ignore
+import {ReactComponent as CloseIcon} from "../../assets/icon-components/close.svg";
+
 
 interface props {
   listProps: IData
@@ -14,14 +18,10 @@ interface props {
 
 export const CardDetailsModal: FC<props> = ({listProps, cardProps}) => {
 
-  const {openModal, removeCard} = useContext(DataContext);
+  const {openModal} = useContext(DataContext);
 
   const closeHandler = () => {
     openModal(cardProps, false)
-  }
-
-  const removeCardHandler = () => {
-    removeCard(cardProps)
   }
 
   return (
@@ -29,13 +29,14 @@ export const CardDetailsModal: FC<props> = ({listProps, cardProps}) => {
       {cardProps.modalOpen && <ModalPopup>
         <ModalInner>
           <ModalTitle>
-           <div>Author: <span>{localStorage.getItem('name')}</span></div>
-            <div>list name:<span>{listProps.listTitle}</span> </div>
-           </ModalTitle>
-          <ModalClose onClick={closeHandler}/>
-
+            <div>Author: <span>{localStorage.getItem('name')}</span></div>
+            <div>list name:<span>{listProps.listTitle}</span></div>
+          </ModalTitle>
+          <ModalClose
+            onClick={closeHandler}>
+            <CloseIcon/>
+          </ModalClose>
           <ModalCard>
-
             <ModalCardNames
               modalTitleCardData={cardProps}
               modalTitleListData={listProps}
@@ -44,18 +45,15 @@ export const CardDetailsModal: FC<props> = ({listProps, cardProps}) => {
               modalDescriptionCardData={cardProps}
               modalDescriptionListData={listProps}
             />
-
             <ModalComments
               commentsCardProps={cardProps}
               commentsListProps={listProps}
             />
-
           </ModalCard>
-
-          <DeleteCard onClick={removeCardHandler}>
-            del
-          </DeleteCard>
-
+          <RemoveCard
+            cardData={cardProps}
+            listsData={listProps}
+          />
         </ModalInner>
       </ModalPopup>}
     </>
@@ -73,38 +71,32 @@ const ModalClose = styled.div`
   position: absolute;
   top: -3px;
   right: -12px;
-  width: 26px;
-  height: 26px;
-  background: #DB5A4C;
+  width: 37px;
+  height: 37px;
   border-radius: 50%;
-  display: grid;
-  place-items: center;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
-    background: rgba(219, 90, 76, 0.91);
+    background: #CCCCCC3d;
   }
+
+  svg {
+    fill: gray;
+  }
+
 `
 const ModalTitle = styled.div`
   font-size: 20px;
-  span{
+
+  span {
     font-weight: 700;
-    font-size: 28px;
+    font-size: 19px;
   }
-  
+
 `
 const ModalCard = styled.div`
 
-`
-const DeleteCard = styled.div`
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 30px;
-  height: 30px;
-  background: tomato;
-  color: white;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
 `

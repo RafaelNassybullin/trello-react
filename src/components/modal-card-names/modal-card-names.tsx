@@ -2,6 +2,9 @@ import React, {FC, SyntheticEvent, useContext, useState} from 'react';
 import styled from "styled-components";
 import {DataContext} from "../../context/DataContext";
 import {ICards, IData} from "../../interfaces";
+import {ModalCardNameButton} from '../../styles/globalStyles';
+//@ts-ignore
+import {ReactComponent as EditIcon} from "../../assets/icon-components/edit.svg";
 
 interface props {
   modalTitleListData: IData
@@ -28,7 +31,9 @@ export const ModalCardNames: FC<props> = ({modalTitleListData, modalTitleCardDat
     <ModalCardName onSubmit={changeCardTitle}>
       <ModalCardNameTitleWrap>
         <h3>Card name:</h3>
-        <ModalCardNameButton onClick={changeCardTitle}>change</ModalCardNameButton>
+        <ModalCardNameButton onClick={changeCardTitle}>
+          <EditIcon/>
+        </ModalCardNameButton>
       </ModalCardNameTitleWrap>
       {!cardTitleChangeOpen && <p>{modalTitleCardData.cardTitle}</p>}
       {cardTitleChangeOpen &&
@@ -48,14 +53,7 @@ const ModalCardNameTitleWrap = styled.div`
   align-items: center;
   justify-content: space-between;
 `
-const ModalCardNameButton = styled.button`
-  background: tomato;
-  color: white;
-  outline: none;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-`
+
 const ModalCardNameInput = styled.input`
   width: 50%;
   outline: none;

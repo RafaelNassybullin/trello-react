@@ -1,12 +1,12 @@
-import React, {FC, useContext} from 'react';
-import { IData } from "../../interfaces";
+import React, {FC, useContext, useState} from 'react';
+import {IData} from "../../interfaces";
 import {InputListTitle} from "../input-list-title";
 import {Cards} from "../card";
 import styled from "styled-components";
 import {AddCard} from "../add-card";
 import {DataContext} from "../../context/DataContext";
 // @ts-ignore
-import {ReactComponent as ThreeDotsICON} from "../../assets/icons/three-dots.svg";
+import {ReactComponent as ThreeDotsICON} from "../../assets/icon-components/three-dots.svg";
 
 interface props {
   listsDataProps: IData
@@ -14,7 +14,9 @@ interface props {
 
 export const Lists: FC<props> = ({listsDataProps}) => {
 
-  const { removeList } = useContext(DataContext);
+  const {removeList} = useContext(DataContext);
+
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   const removeHandler = () => {
     removeList(listsDataProps)
@@ -23,21 +25,17 @@ export const Lists: FC<props> = ({listsDataProps}) => {
   return (
     <>
       <List>
-
         <ListTitleWrap>
-
           <InputListTitle listTitleData={listsDataProps}/>
-
-          <ListMenu onClick={removeHandler}>
+          <ListMenu onClick={()=>setMenuOpen(!menuOpen)}>
+            {menuOpen&&<RemoveList>
+              <RemoveListBtn onClick={removeHandler}>Удалить</RemoveListBtn>
+            </RemoveList>}
             <ThreeDotsICON/>
           </ListMenu>
-
         </ListTitleWrap>
-
         <Cards cardsDataProps={listsDataProps}/>
-
         <AddCard listDataAddCardProps={listsDataProps}/>
-
       </List>
     </>
   )
@@ -54,6 +52,7 @@ const List = styled.div`
   padding: 7px 5px 40px 5px;
 `
 const ListMenu = styled.div`
+  position: relative;
   width: 30px;
   height: 30px;
   display: grid;
@@ -64,10 +63,41 @@ const ListMenu = styled.div`
   &:hover {
     background: #CCCCCC;
   }
+
   svg {
     width: 15px;
   }
 `
+const RemoveList = styled.div`
+  position: absolute;
+  top: 23px;
+  left: 16px;
+  width: 130px;
+  height: 43px;
+  background: #FFFFFF3d;
+  backdrop-filter: blur(15px);
+  z-index: 3;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 7px;
+  border-radius: 3px;
+
+`
+const RemoveListBtn = styled.button`
+  background: red;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 7px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background: crimson;
+  }
+`
+
 const ListTitleWrap = styled.div`
   width: 100%;
   display: flex;

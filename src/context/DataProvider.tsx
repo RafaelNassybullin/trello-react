@@ -38,8 +38,8 @@ export const DataProvider = ({ children }: props) => {
   const addComment = ( commentValue:IComment, list: IData, card: ICards) => {
     dispatch({type: 'ADD_COMMENT', payload: { commentValue, list, card }})
   }
-  const removeCard = ( card: ICards) => {
-    dispatch({type: 'REMOVE_CARD', payload: {  card }})
+  const removeCard = (list: IData, card: ICards) => {
+    dispatch({type: 'REMOVE_CARD', payload: { list,  card }})
   }
   const removeList = ( list: IData) => {
     dispatch({type: 'REMOVE_LIST', payload: {  list }})

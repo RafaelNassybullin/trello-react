@@ -13,7 +13,8 @@ export const AddCard: FC<props> = ({listDataAddCardProps}) => {
 
   const [cardTextValue, setCardTextValue] = useState<string>('');
 
-  const {addCards} = useContext(DataContext);
+  const {addCards, dataState} = useContext(DataContext);
+  const {datass} = dataState
 
   const addCardHandler = (e: SyntheticEvent) => {
     e.preventDefault()
@@ -27,6 +28,7 @@ export const AddCard: FC<props> = ({listDataAddCardProps}) => {
       }, listDataAddCardProps)
     }
     setCardTextValue('')
+    localStorage.setItem('localData', JSON.stringify(datass))
     setAddCardOpen(false)
   }
 

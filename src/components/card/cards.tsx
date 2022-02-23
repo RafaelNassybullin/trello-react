@@ -5,6 +5,10 @@ import styled from "styled-components";
 import {CardDetailsModal} from "../card-details-modal";
 import {DataContext} from "../../context/DataContext";
 
+//@ts-ignore
+import {ReactComponent as CommentIcon} from "../../assets/icon-components/comments.svg";
+
+
 interface props {
   cardsDataProps: IData
 }
@@ -13,7 +17,7 @@ export const Cards: FC<props> = ({cardsDataProps}) => {
   const [state, setState] = useState<boolean>(false)
   const {openModal} = useContext(DataContext);
 
-  const handleCard = (el:ICards) => {
+  const handleCard = (el: ICards) => {
     setState(!state)
     openModal(el, true)
   }
@@ -25,15 +29,26 @@ export const Cards: FC<props> = ({cardsDataProps}) => {
 
           <React.Fragment key={uuidv4()}>
 
-            <Card onClick={()=>handleCard(el)}>
+            <Card onClick={() => handleCard(el)}>
 
               <CardText>{el.cardTitle}</CardText>
 
-              <p>{el.cardComment.length}</p>
+
+              <CommentCount>
+
+
+                  <CommentIcon/>
+                  {el.cardComment.length && <p>{el.cardComment.length}</p>}
+
+
+
+
+              </CommentCount>
+
 
             </Card>
 
-           <CardDetailsModal
+            <CardDetailsModal
               cardProps={el}
               listProps={cardsDataProps}/>
 
@@ -56,11 +71,22 @@ const Card = styled.div`
   cursor: pointer;
   display: flex;
   justify-content: space-between;
+
   &:hover {
     background: #40E3B5;
     color: white;
-  }
+    }
 `
 const CardText = styled.p`
 
+`
+const CommentCount = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 35px;
+  height: 20px;
+  svg {
+    fill: gray;
+  }
 `

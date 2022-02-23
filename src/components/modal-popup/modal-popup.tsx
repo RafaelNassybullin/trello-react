@@ -13,7 +13,6 @@ export const ModalPopup: FC<props> = ({children}) => {
     </Overlay>
   )
 }
-
 const Overlay = styled.div`
   position: fixed;
   top: 0;

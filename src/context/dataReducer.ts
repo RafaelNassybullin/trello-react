@@ -9,7 +9,7 @@ type DataAction =
   | { type: 'CHANGE_DESCRIPTIONS', payload: { descriptionValue: string, list: IData, card: ICards } }
   | { type: 'CHANGE_CARD_TITLES', payload: { titleValue: string, list: IData, card: ICards } }
   | { type: 'ADD_COMMENT', payload: { commentValue: IComment, list: IData, card: ICards } }
-  | { type: 'REMOVE_CARD', payload: { card: ICards } }
+  | { type: 'REMOVE_CARD', payload: {list: IData, card: ICards } }
   | { type: 'REMOVE_LIST', payload: { list: IData } }
 
 export const DataReducer = (state: IDataState, action: DataAction): IDataState => {
@@ -101,6 +101,15 @@ export const DataReducer = (state: IDataState, action: DataAction): IDataState =
             }
             return el
           })
+      }
+    case 'REMOVE_CARD':
+      return {
+        ...state, datass: state.datass.map((el)=>({
+          ...el,
+          cards: el.cards.filter((el)=>{
+            return el.id !== action.payload.card.id
+          })
+        }))
       }
     case 'REMOVE_LIST':
       return {

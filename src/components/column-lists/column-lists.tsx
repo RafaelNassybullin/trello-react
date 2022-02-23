@@ -1,9 +1,10 @@
-import React, {FC, useContext} from 'react';
+import React, {FC, useContext, useEffect} from 'react';
 import {v4 as uuidv4} from 'uuid';
 import {Lists} from "../lists";
 import {AddList} from "../add-list";
 import {DataContext} from "../../context/DataContext";
 import styled from "styled-components";
+import {IData} from "../../interfaces";
 
 interface props {
 
@@ -12,9 +13,7 @@ interface props {
 export const ColumnLists: FC<props> = () => {
 
   const authorName: string | null = localStorage.getItem('name');
-
   const {dataState} = useContext(DataContext);
-
   const {datass} = dataState
 
   return (
@@ -25,7 +24,7 @@ export const ColumnLists: FC<props> = () => {
           <AuthorTitle>{authorName}</AuthorTitle>
           <ListWrap>
             {
-              datass.map((el) => <Lists
+              datass.map((el: IData) => <Lists
                 key={uuidv4()}
                 listsDataProps={el}/>)
             }
@@ -38,11 +37,11 @@ export const ColumnLists: FC<props> = () => {
 }
 
 const AuthorTitle = styled.h1`
-  color:white;
+  color: white;
   font-size: 3rem;
 `
 const ListWrap = styled.div`
-  display:flex;
+  display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
 `

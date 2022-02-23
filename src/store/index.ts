@@ -1,6 +1,5 @@
 import {IData} from "../interfaces";
-
-export const listsData: IData[] = [
+export let listsData: IData[] = [
   {
     id: 'list-1',
     listTitle: 'TODO',
@@ -140,3 +139,6 @@ export const listsData: IData[] = [
     ]
   },
 ]
+if(localStorage.getItem('localData')||''===null){
+  listsData = JSON.parse(localStorage.getItem('localData')||'')
+}
