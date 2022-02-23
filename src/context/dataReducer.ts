@@ -18,7 +18,6 @@ export const DataReducer = (state: IDataState, action: DataAction): IDataState =
 
     case 'ADD_NEW_LIST':
       return {...state, datass: [...state.datass, action.payload]}
-
     case 'CHANGE_LIST_TITLE':
       return {
         ...state, datass:
@@ -29,7 +28,6 @@ export const DataReducer = (state: IDataState, action: DataAction): IDataState =
             return el
           })
       }
-
     case 'ADD_CARD':
       return {
         ...state, datass:
@@ -43,28 +41,31 @@ export const DataReducer = (state: IDataState, action: DataAction): IDataState =
     case 'OPEN_MODAL':
       return {
         ...state, datass:
-          state.datass.map((el) => {
+          state.datass.map((el:IData) => {
             el.cards.map(el => el.id === action.payload.card.id ? el.modalOpen = action.payload.list : null)
             return el
           })
       }
-
     case 'REMOVE_COMMENT':
       return {
-        ...state, datass:
-          state.datass.filter(({...el}) => {
-            el.cards.some(el => {
-              el.cardComment.some(el => el.id === action.payload.comment.id)
-            })
-            return el
-          })
+        ...state,
+        datass: state.datass.map((el:IData) => ({
+          ...el,
+          cards: el.cards.map((el:ICards) => ({
+            ...el,
+            cardComment: el.cardComment.filter((el:IComment) => {
+                return el.id !== action.payload.comment.id
+              }
+            )
+          }))
+        }))
       }
     case 'CHANGE_DESCRIPTIONS':
       return {
         ...state, datass:
           state.datass.map(({...el}) => {
             if (el.id === action.payload.list.id) {
-              el.cards.map((el) => {
+              el.cards.map((el:ICards) => {
                   if (el.id === action.payload.card.id)
                     el.cardDescription = action.payload.descriptionValue
                 }
@@ -103,7 +104,10 @@ export const DataReducer = (state: IDataState, action: DataAction): IDataState =
       }
     case 'REMOVE_LIST':
       return {
-        ...state, datass: [...state.datass.filter(el => el.id !== action.payload.list.id)]
+        ...state, datass: [
+          ...state.datass
+            .filter(el => el.id !== action.payload.list.id)
+        ]
       }
     default:
       return state

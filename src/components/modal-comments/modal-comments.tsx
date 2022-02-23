@@ -29,7 +29,7 @@ export const ModalComments: FC<props> = ({commentsCardProps, commentsListProps})
     setAddCommentOpen(!addCommentOpen)
     if (commentValue) {
       addComment({
-        id: 'card-2-1comment-1',
+        id: uuidv4(),
         commentText: commentValue
       }, commentsListProps, commentsCardProps)
     }

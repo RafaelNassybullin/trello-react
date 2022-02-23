@@ -29,10 +29,10 @@ export const DataProvider = ({ children }: props) => {
   const removeComment = (comment:IComment , list: IData, card:ICards) => {
     dispatch({type: 'REMOVE_COMMENT', payload: {comment, list, card}})
   }
-   const changeDescriptions = ( descriptionValue: string , list: IData, card: ICards) => {
+  const changeDescriptions = ( descriptionValue: string , list: IData, card: ICards) => {
     dispatch({type: 'CHANGE_DESCRIPTIONS', payload: { descriptionValue , list, card }})
   }
-   const changeCardTitles = ( titleValue:string, list: IData, card: ICards) => {
+  const changeCardTitles = ( titleValue:string, list: IData, card: ICards) => {
     dispatch({type: 'CHANGE_CARD_TITLES', payload: { titleValue, list, card }})
   }
   const addComment = ( commentValue:IComment, list: IData, card: ICards) => {

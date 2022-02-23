@@ -1,7 +1,6 @@
 export interface IDataState {
   datass: IData[]
 }
-
 export interface ICards {
   id: string
   cardTitle: string
