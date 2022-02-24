@@ -1,13 +1,35 @@
-import React, {FC} from 'react';
+import React, {FC, useContext, useEffect, useRef} from 'react';
 import styled from "styled-components";
+import {ICards} from "../../interfaces";
+import {DataContext} from "../../context/DataContext";
 
 export interface props {
+  cardsData?: ICards | undefined
 }
 
-export const ModalPopup: FC<props> = ({children}) => {
+export const ModalPopup: FC<props> = ({children, cardsData}) => {
+
+  const myRef = useRef<HTMLDivElement>(null);
+
+  const {openModal} = useContext(DataContext);
+
+  const close = (event: MouseEvent) => {
+    if (myRef.current && !myRef.current.contains(event.target as HTMLDivElement)) {
+      openModal(cardsData, false)
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('click', close, true);
+    return () => {
+      document.removeEventListener('click', close, true);
+    };
+  }, []);
+
+
   return (
     <Overlay>
-      <Popup>
+      <Popup ref={myRef}>
         {children}
       </Popup>
     </Overlay>

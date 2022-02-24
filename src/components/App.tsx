@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import GlobalStyles from "../styles/globalStyles";
-import {MainBoard} from "./main-desc/main-desc";
+import {MainBoard} from "./main-board/main-board";
 
 
 export const App: FC = () => {

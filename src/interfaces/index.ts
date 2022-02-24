@@ -1,5 +1,5 @@
 export interface IDataState {
-  datass: IData[]
+  mainData: IData[]
 }
 export interface ICards {
   id: string
