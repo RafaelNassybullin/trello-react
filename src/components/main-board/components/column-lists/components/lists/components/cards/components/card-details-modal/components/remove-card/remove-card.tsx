@@ -1,12 +1,11 @@
 import React, {FC, useContext} from 'react';
 import styled from "styled-components";
-import {DataContext} from "../../../../../../../../../../../../context/DataContext";
-import {ICards, IData} from "../../../../../../../../../../../../interfaces";
-//@ts-ignore
-import {ReactComponent as DeleteIcon} from "../../../../../../../../../../../../assets/icon-components/delete-card.svg";
+import {DataContext} from "context/DataContext";
+import {ICards, IColumns} from "interfaces";
+import {IconDelete} from "assets/icon-components/icon-delete";
 
 interface props {
-  listsData: IData
+  listsData: IColumns
   cardData: ICards
 }
 export const RemoveCard: FC<props> = ({listsData, cardData}) => {
@@ -23,7 +22,7 @@ export const RemoveCard: FC<props> = ({listsData, cardData}) => {
   return (
     <>
       <DeleteCard onClick={removeCardHandler}>
-        <DeleteIcon/>
+        <IconDelete/>
       </DeleteCard>
     </>
   )

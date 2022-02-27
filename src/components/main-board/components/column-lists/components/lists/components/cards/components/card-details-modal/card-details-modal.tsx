@@ -1,16 +1,16 @@
 import React, {FC, useContext} from 'react';
-import {ModalPopup} from "../../../../../../../../../modal-popup";
-import {ICards, IData} from "../../../../../../../../../../interfaces";
+import {ModalPopup} from "components/modal-popup";
+import {ICards, IColumns} from "interfaces";
 import styled from "styled-components";
-import {DataContext} from "../../../../../../../../../../context/DataContext";
+import {DataContext} from "context/DataContext";
 import {ModalCardNames} from "./components";
 import {ModalCardDescriptions} from "./components";
 import {ModalComments} from "./components";
 import {RemoveCard} from "./components";
-import {CloseIcon} from "../../../../../../../../../../assets/icon-components/closeIcon";
+import {IconClose} from "assets/icon-components/icon-close";
 
 interface props {
-  listProps: IData
+  listProps: IColumns
   cardProps: ICards
 }
 
@@ -32,7 +32,7 @@ export const CardDetailsModal: FC<props> = ({listProps, cardProps}) => {
           </ModalTitle>
 
           <ModalClose onClick={closeHandler}>
-            <CloseIcon/>
+            <IconClose/>
           </ModalClose>
 
           <ModalCard>

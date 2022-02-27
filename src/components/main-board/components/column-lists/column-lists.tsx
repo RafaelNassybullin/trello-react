@@ -1,20 +1,16 @@
 import React, {FC, useContext} from 'react';
 import {v4 as uuidv4} from 'uuid';
-import {Lists} from "./components/lists";
-import {AddList} from "./components/add-list";
-import {DataContext} from "../../../../context/DataContext";
+import {Lists} from "./components";
+import {AddList} from "./components";
+import {DataContext} from "context/DataContext";
 import styled from "styled-components";
-import {IData} from "../../../../interfaces";
+import {IColumns} from "interfaces";
 
-interface props {
-
-}
-
-export const ColumnLists: FC<props> = () => {
+export const ColumnLists: FC = () => {
 
   const authorName: string | null = localStorage.getItem('name');
-  const {dataState} = useContext(DataContext);
-  const {mainData} = dataState
+  const { dataState } = useContext(DataContext);
+  const { mainData } = dataState
 
   return (
     <>
@@ -22,7 +18,7 @@ export const ColumnLists: FC<props> = () => {
         <>
           <AuthorTitle>{authorName}</AuthorTitle>
           <ListWrap>
-            {mainData.map((el: IData) => <Lists key={uuidv4()} listsDataProps={el}/>)}
+            {mainData.map((el: IColumns) => <Lists key={uuidv4()} listsDataProps={el}/>)}
             <AddList/>
           </ListWrap>
         </>}

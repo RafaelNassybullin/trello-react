@@ -1,12 +1,12 @@
 import React, {FC, useContext, useState} from 'react';
-import {ICards, IComment, IData} from "../../../../../../../../../../../../interfaces";
+import {ICards, IComment, IColumns} from "interfaces";
 import {v4 as uuidv4} from "uuid";
 import styled from "styled-components";
-import {DataContext} from "../../../../../../../../../../../../context/DataContext";
+import {DataContext} from "context/DataContext";
 
 interface props {
   commentsCardProps: ICards
-  commentsListProps: IData
+  commentsListProps: IColumns
 }
 
 export const ModalComments: FC<props> = ({commentsCardProps, commentsListProps}) => {
@@ -26,6 +26,7 @@ export const ModalComments: FC<props> = ({commentsCardProps, commentsListProps})
     if (commentValue) {
       addComment({
         id: uuidv4(),
+        cardID:'',
         commentText: commentValue
       }, commentsListProps, commentsCardProps)
     }
@@ -34,7 +35,6 @@ export const ModalComments: FC<props> = ({commentsCardProps, commentsListProps})
   return (
     <Comments>
       <CommentsTitle>Comments</CommentsTitle>
-
       <CommentsAddWrap>
         <CommentsInput
           type="text"

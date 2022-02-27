@@ -1,11 +1,11 @@
 import React, {FC, SyntheticEvent, useContext, useState} from 'react';
-import {DataContext} from "../../../../../../../../context/DataContext";
+import {DataContext} from "context/DataContext";
 import {v4 as uuidv4} from "uuid";
-import {IData} from "../../../../../../../../interfaces";
+import {IColumns} from "interfaces";
 import styled from "styled-components";
 
 interface props {
-  listDataAddCardProps:IData
+  listDataAddCardProps:IColumns
 }
 export const AddCard: FC<props> = ({listDataAddCardProps}) => {
   const [addCardOpen, setAddCardOpen] = useState<boolean>(false);
@@ -19,6 +19,7 @@ export const AddCard: FC<props> = ({listDataAddCardProps}) => {
     if (cardTextValue) {
       addCards({
         id: uuidv4(),
+        columnID:'',
         cardTitle: cardTextValue,
         cardDescription: 'Описание',
         cardComment: [],

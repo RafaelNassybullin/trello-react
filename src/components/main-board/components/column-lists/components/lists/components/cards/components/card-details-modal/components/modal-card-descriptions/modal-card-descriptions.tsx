@@ -1,14 +1,13 @@
 import React, {FC, useContext, useState} from 'react';
 import styled from "styled-components";
-import {DataContext} from "../../../../../../../../../../../../context/DataContext";
-import {ICards, IData} from "../../../../../../../../../../../../interfaces";
-import {ModalCardNameButton} from "../../../../../../../../../../../../styles/globalStyles";
-//@ts-ignore
-import {ReactComponent as EditIcon} from "../../../../../../../../../../../../assets/icon-components/edit.svg";
+import {DataContext} from "context/DataContext";
+import {ICards, IColumns} from "interfaces";
+import {ModalCardNameButton} from "styles/globalStyles";
+import {IconEdit} from "assets/icon-components/icon-edit";
 
 interface props {
   modalDescriptionCardData: ICards
-  modalDescriptionListData: IData
+  modalDescriptionListData: IColumns
 }
 
 export const ModalCardDescriptions: FC<props> = ({modalDescriptionListData, modalDescriptionCardData}) => {
@@ -29,7 +28,7 @@ export const ModalCardDescriptions: FC<props> = ({modalDescriptionListData, moda
       <ModalCardDescriptionWrap>
         <ModalCardDescriptionTitle>Description</ModalCardDescriptionTitle>
         <ModalCardNameButton onClick={changeDescription}>
-          <EditIcon/>
+          <IconEdit/>
         </ModalCardNameButton>
       </ModalCardDescriptionWrap>
 

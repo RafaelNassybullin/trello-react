@@ -1,10 +1,10 @@
 import React, {FC, SyntheticEvent, useContext, useState} from 'react';
-import {IData} from "../../../../../../../../interfaces";
+import {IColumns} from "interfaces";
 import styled from "styled-components";
-import {DataContext} from "../../../../../../../../context/DataContext";
+import {DataContext} from "context/DataContext";
 
 interface props {
-  listTitleData: IData
+  listTitleData: IColumns
 }
 
 export const InputListTitle: FC<props> = ({listTitleData}) => {

@@ -1,18 +1,19 @@
 import {createContext} from "react";
-import {ICards, IData, IDataState, IComment} from "../interfaces";
+import { ICards, IColumns, IColumnsState, IComment } from "interfaces";
 
 export type DataContextProps = {
-  dataState:IDataState
-  addList:(list:IData)=>void
+  dataState:IColumnsState
+  pushLocalData:()=>void
+  addList:(list:IColumns)=>void
   changeListTitle:( id:string, value:string )=>void
-  addCards:(card:ICards, list:IData)=>void
+  addCards:(card:ICards, list:IColumns)=>void
   openModal:(card:ICards|undefined,list:boolean)=>void
-  removeComment:(comment:IComment , list: IData, card:ICards)=>void
-  changeDescriptions:(descriptionValue: string , list: IData, card: ICards)=>void
-  changeCardTitles:(titleValue:string, list: IData, card: ICards)=>void
-  addComment:(commentValue:IComment, list: IData, card: ICards)=>void
-  removeCard:(list: IData, card: ICards)=>void
-  removeList:(list: IData)=>void
+  removeComment:(comment:IComment , list: IColumns, card:ICards)=>void
+  changeDescriptions:(descriptionValue: string , list: IColumns, card: ICards)=>void
+  changeCardTitles:(titleValue:string, list: IColumns, card: ICards)=>void
+  addComment:(commentValue:IComment, list: IColumns, card: ICards)=>void
+  removeCard:(list: IColumns, card: ICards)=>void
+  removeList:(list: IColumns)=>void
 }
 
 export const DataContext = createContext<DataContextProps>({} as DataContextProps)

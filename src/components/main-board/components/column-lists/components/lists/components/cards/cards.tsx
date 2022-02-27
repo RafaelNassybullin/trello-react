@@ -1,20 +1,18 @@
 import React, {FC, useContext, useState} from 'react';
 import {v4 as uuidv4} from 'uuid';
-import {ICards, IData} from "../../../../../../../../interfaces";
+import {ICards, IColumns} from "interfaces";
 import styled from "styled-components";
 import {CardDetailsModal} from "./components";
-import {DataContext} from "../../../../../../../../context/DataContext";
-//@ts-ignore
-import {ReactComponent as CommentIcon} from "../../../../../../../../assets/icon-components/comments.svg";
+import {DataContext} from "context/DataContext";
+import {IconComments} from "assets/icon-components/icon-comments";
 
 interface props {
-  cardsDataProps: IData
+  cardsDataProps: IColumns
 }
 
 export const Cards: FC<props> = ({cardsDataProps}) => {
   const [state, setState] = useState<boolean>(false)
   const {openModal} = useContext(DataContext);
-
   const handleCard = (el: ICards) => {
     setState(!state)
     openModal(el, true)
@@ -28,7 +26,8 @@ export const Cards: FC<props> = ({cardsDataProps}) => {
             <Card onClick={() => handleCard(el)}>
               <CardText>{el.cardTitle}</CardText>
               <CommentCount>
-                  <CommentIcon/>{el.cardComment.length && <p>{el.cardComment.length}</p>}
+                <IconComments/>
+                {el.cardComment.length && <p>{el.cardComment?.length}</p>}
               </CommentCount>
             </Card>
             <CardDetailsModal cardProps={el} listProps={cardsDataProps}/>
@@ -54,7 +53,7 @@ const Card = styled.div`
   &:hover {
     background: #40E3B5;
     color: white;
-    }
+  }
 `
 const CardText = styled.p`
 
@@ -65,6 +64,7 @@ const CommentCount = styled.div`
   justify-content: space-between;
   width: 35px;
   height: 20px;
+
   svg {
     fill: gray;
   }

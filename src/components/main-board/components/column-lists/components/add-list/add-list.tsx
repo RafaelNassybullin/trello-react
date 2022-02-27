@@ -1,12 +1,9 @@
 import React, {FC, useContext} from 'react';
-import styled from "styled-components";
-import {DataContext} from "../../../../../../context/DataContext";
+import {DataContext} from "context/DataContext";
 import {v4 as uuidv4} from "uuid";
+import {AddListBtnUI} from "ui/add-list-btn/add-list-btn";
 
-interface props {
-
-}
-export const AddList: FC<props> = () => {
+export const AddList: FC = () => {
   const {addList, dataState} = useContext(DataContext)
   const {mainData} = dataState
 
@@ -16,25 +13,12 @@ export const AddList: FC<props> = () => {
   }
 
   return (
-    <AddListBtn onClick={handlerAddList}>+ Add a list...</AddListBtn>
+    <div onClick={handlerAddList}>
+      <AddListBtnUI>
+        + Add a list...
+      </AddListBtnUI>
+    </div>
   )
 }
 
-const AddListBtn = styled.button`
-  margin-top: 5px;
-  width: 300px;
-  height: 50px;
-  border-radius: 3px;
-  font-size: 16px;
-  color: white;
-  outline: none;
-  border: none;
-  text-align: start;
-  padding: 0 15px;
-  background: rgba(255, 255, 255, 0.2);
-  cursor: pointer;
 
-  &:hover {
-    background: rgba(255, 255, 255, 0.4);
-  }
-`

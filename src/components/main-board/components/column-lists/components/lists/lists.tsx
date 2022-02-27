@@ -1,19 +1,19 @@
 import React, {FC, useContext, useState} from 'react';
-import {IData} from "../../../../../../interfaces";
+import {IColumns} from "interfaces";
 import {InputListTitle} from "./components";
-import {Cards} from "./components/cards";
+import {Cards} from "./components";
 import styled from "styled-components";
 import {AddCard} from "./components";
-import {DataContext} from "../../../../../../context/DataContext";
-// @ts-ignore
-import {ReactComponent as ThreeDotsICON} from "../../../../../../assets/icon-components/three-dots.svg";
+import {DataContext} from "context/DataContext";
+import {IconThreeDots} from "assets/icon-components/icon-three-dots";
 
 interface props {
-  listsDataProps: IData
+  listsDataProps: IColumns
 }
 
 export const Lists: FC<props> = ({listsDataProps}) => {
   const {removeList} = useContext(DataContext);
+
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   const removeHandler = () => {
@@ -25,20 +25,15 @@ export const Lists: FC<props> = ({listsDataProps}) => {
       <List>
         <ListTitleWrap>
           <InputListTitle listTitleData={listsDataProps}/>
-
           <ListMenu onClick={()=>setMenuOpen(!menuOpen)}>
             {menuOpen&&<RemoveList>
               <RemoveListBtn onClick={removeHandler}>Удалить</RemoveListBtn>
             </RemoveList>}
-            <ThreeDotsICON/>
+            <IconThreeDots/>
           </ListMenu>
-
         </ListTitleWrap>
-
         <Cards cardsDataProps={listsDataProps}/>
-
         <AddCard listDataAddCardProps={listsDataProps}/>
-
       </List>
     </>
   )

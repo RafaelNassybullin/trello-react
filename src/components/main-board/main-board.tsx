@@ -1,7 +1,7 @@
 import React, {FC, useState} from "react";
-import {ColumnLists} from "./components/column-lists";
+import {ColumnLists} from "./components";
 import {ModalPopup} from "../modal-popup";
-import {YourNameInput} from "./components/your-name-input";
+import {YourNameInput} from "./components";
 
 interface props {}
 
@@ -13,7 +13,6 @@ export const MainBoard: FC<props> = () => {
   return (
     <>
       <ColumnLists/>
-
       {!showModal && !localStorage.getItem('name') && <ModalPopup>
           <YourNameInput modalCallback={modalCallback}/>
         </ModalPopup>}

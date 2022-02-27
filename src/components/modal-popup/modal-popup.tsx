@@ -1,10 +1,10 @@
 import React, {FC, useContext, useEffect, useRef} from 'react';
 import styled from "styled-components";
-import {ICards} from "../../interfaces";
-import {DataContext} from "../../context/DataContext";
+import {ICards} from "interfaces";
+import {DataContext} from "context/DataContext";
 
 export interface props {
-  cardsData?: ICards | undefined
+  cardsData?: ICards
 }
 
 export const ModalPopup: FC<props> = ({children, cardsData}) => {
