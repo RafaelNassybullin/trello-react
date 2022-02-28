@@ -6,21 +6,19 @@ import {ModalCardNameButton} from 'styles/globalStyles';
 import {IconEdit} from "assets/icon-components/icon-edit";
 
 interface props {
-  modalTitleListData: IColumns
   modalTitleCardData: ICards
 }
 
-export const ModalCardNames: FC<props> = ({modalTitleListData, modalTitleCardData}) => {
+export const ModalCardNames: FC<props> = ({ modalTitleCardData}) => {
   const [cardTitleValue, setCardTitleValue] = useState('');
   const [cardTitleChangeOpen, setcardTitleChangeOpen] = useState(false);
-
   const {changeCardTitles} = useContext(DataContext);
 
   const changeCardTitle = (e: SyntheticEvent) => {
     e.preventDefault()
     setcardTitleChangeOpen(!cardTitleChangeOpen)
     if (cardTitleValue) {
-      changeCardTitles(cardTitleValue, modalTitleListData, modalTitleCardData)
+      changeCardTitles(cardTitleValue, modalTitleCardData)
     }
   }
 

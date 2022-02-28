@@ -12,22 +12,20 @@ export const AddCard: FC<props> = ({listDataAddCardProps}) => {
   const [cardTextValue, setCardTextValue] = useState<string>('');
 
   const {addCards, dataState} = useContext(DataContext);
-  const {mainData} = dataState
+  const {columns} = dataState
 
   const addCardHandler = (e: SyntheticEvent) => {
     e.preventDefault()
     if (cardTextValue) {
       addCards({
         id: uuidv4(),
-        columnID:'',
+        columnID: listDataAddCardProps.id,
         cardTitle: cardTextValue,
-        cardDescription: 'Описание',
-        cardComment: [],
-        modalOpen:false
+        cardDescription: 'Описание'
       }, listDataAddCardProps)
     }
     setCardTextValue('')
-    localStorage.setItem('localData', JSON.stringify(mainData))
+    localStorage.setItem('localData', JSON.stringify(columns))
     setAddCardOpen(false)
   }
 

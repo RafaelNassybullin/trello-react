@@ -8,46 +8,55 @@ import {ModalCardDescriptions} from "./components";
 import {ModalComments} from "./components";
 import {RemoveCard} from "./components";
 import {IconClose} from "assets/icon-components/icon-close";
+import {v4 as uuidv4} from 'uuid';
 
-interface props {
-  listProps: IColumns
-  cardProps: ICards
-}
-
-export const CardDetailsModal: FC<props> = ({listProps, cardProps}) => {
-  const {openModal} = useContext(DataContext);
+export const CardDetailsModal: FC = () => {
+  const {openModal, closeModal, dataState} = useContext(DataContext);
+  const {modalCardID, cards} = dataState
 
   const closeHandler = () => {
-    openModal(cardProps, false)
+    closeModal()
   }
 
   return (
     <>
-      {cardProps.modalOpen && <ModalPopup cardsData={cardProps}>
+      {modalCardID && <ModalPopup>
+        {cards.map(ei => {
+          if (ei.id === modalCardID) {
+            return (
+              <ModalInner key={uuidv4()}>
 
-        <ModalInner>
-          <ModalTitle>
-            <div>Author: <span>{localStorage.getItem('name')}</span></div>
-            <div>list name:<span>{listProps.listTitle}</span></div>
-          </ModalTitle>
 
-          <ModalClose onClick={closeHandler}>
-            <IconClose/>
-          </ModalClose>
+                <ModalTitle>
+                  <div>Author: <span>{localStorage.getItem('name')}</span></div>
+                  <div>list name: <span>{ei.cardTitle}</span></div>
+                </ModalTitle>
 
-          <ModalCard>
-            <ModalCardNames modalTitleCardData={cardProps} modalTitleListData={listProps}/>
-            <ModalCardDescriptions modalDescriptionCardData={cardProps} modalDescriptionListData={listProps}/>
-            <ModalComments commentsCardProps={cardProps} commentsListProps={listProps}/>
-          </ModalCard>
+                <ModalClose onClick={closeHandler}>
+                  <IconClose/>
+                </ModalClose>
 
-          <RemoveCard cardData={cardProps} listsData={listProps}/>
-        </ModalInner>
+                <ModalCard>
 
+
+                  <ModalCardNames modalTitleCardData={ei} />
+                  <ModalCardDescriptions modalDescriptionCardData={ei} />
+
+                {/*  <ModalComments commentsCardProps={cardProps} commentsListProps={listProps}/>*/}
+
+
+                </ModalCard>
+
+                <RemoveCard cardData={ei}/>
+              </ModalInner>
+            )
+          }
+        })}
       </ModalPopup>}
     </>
   )
 }
+
 
 const ModalInner = styled.div`
   width: 600px;
@@ -58,6 +67,7 @@ const ModalInner = styled.div`
 `
 const ModalTitle = styled.div`
   font-size: 20px;
+
   span {
     font-weight: 700;
     font-size: 19px;
@@ -74,6 +84,7 @@ const ModalClose = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
   &:hover {
     background: #CCCCCC3d;
   }

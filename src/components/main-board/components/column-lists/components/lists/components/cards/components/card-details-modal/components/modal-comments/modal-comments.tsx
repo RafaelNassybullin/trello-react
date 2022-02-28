@@ -13,7 +13,7 @@ export const ModalComments: FC<props> = ({commentsCardProps, commentsListProps})
   const [addCommentOpen, setAddCommentOpen] = useState(false);
   const [commentValue, setCommentValue] = useState('');
 
-  const {removeComment, addComment,} = useContext(DataContext);
+  const {removeComment, addComment} = useContext(DataContext);
 
   const addCommentsHandler = (el: IComment) => {
     setAddCommentOpen(!addCommentOpen)
@@ -46,12 +46,12 @@ export const ModalComments: FC<props> = ({commentsCardProps, commentsListProps})
       </CommentsAddWrap>
 
       <CommentsItemsWrap>
-        {commentsCardProps.cardComment.map((el: IComment) =>
-          <CommentsItems key={uuidv4()}>
-            <CommentTitle>{el.commentText}</CommentTitle>
-            <RemoveComment onClick={() => addCommentsHandler(el)}>X</RemoveComment>
-          </CommentsItems>
-        )}
+        {/*{commentsCardProps.cardComment.map((el: IComment) =>*/}
+        {/*  <CommentsItems key={uuidv4()}>*/}
+        {/*    <CommentTitle>{el.commentText}</CommentTitle>*/}
+        {/*    <RemoveComment onClick={() => addCommentsHandler(el)}>X</RemoveComment>*/}
+        {/*  </CommentsItems>*/}
+        {/*)}*/}
       </CommentsItemsWrap>
 
     </Comments>

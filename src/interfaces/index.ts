@@ -1,15 +1,14 @@
 
 export interface IColumnsState {
-  mainData:IColumns[]
-  columns: IColumns[]
+  columns:IColumns[]
   cards:ICards[]
   comments:IComment[]
+  modalCardID:string
 }
 
 export interface IColumns {
   id: string
   listTitle: string
-  cards: ICards[]
 }
 
 export interface ICards {
@@ -17,8 +16,6 @@ export interface ICards {
   columnID:string
   cardTitle: string
   cardDescription: string
-  cardComment: IComment[]
-  modalOpen:boolean
 }
 
 export interface IComment {

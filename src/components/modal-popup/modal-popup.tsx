@@ -11,11 +11,11 @@ export const ModalPopup: FC<props> = ({children, cardsData}) => {
 
   const myRef = useRef<HTMLDivElement>(null);
 
-  const {openModal} = useContext(DataContext);
+  const { closeModal } = useContext(DataContext);
 
   const close = (event: MouseEvent) => {
     if (myRef.current && !myRef.current.contains(event.target as HTMLDivElement)) {
-      openModal(cardsData, false)
+      closeModal()
     }
   }
 

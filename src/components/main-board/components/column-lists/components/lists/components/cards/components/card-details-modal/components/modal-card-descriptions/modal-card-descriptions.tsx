@@ -7,10 +7,10 @@ import {IconEdit} from "assets/icon-components/icon-edit";
 
 interface props {
   modalDescriptionCardData: ICards
-  modalDescriptionListData: IColumns
+  // modalDescriptionListData: IColumns
 }
 
-export const ModalCardDescriptions: FC<props> = ({modalDescriptionListData, modalDescriptionCardData}) => {
+export const ModalCardDescriptions: FC<props> = ({ modalDescriptionCardData }) => {
   const [descriptionValue, setDescriptionValue] = useState('');
   const [descriptionOpen, setDescriptionOpen] = useState(false);
   const {changeDescriptions} = useContext(DataContext);
@@ -18,7 +18,7 @@ export const ModalCardDescriptions: FC<props> = ({modalDescriptionListData, moda
   const changeDescription = () => {
     setDescriptionOpen(!descriptionOpen)
     if (descriptionValue) {
-      changeDescriptions(descriptionValue, modalDescriptionListData, modalDescriptionCardData)
+      changeDescriptions(descriptionValue, modalDescriptionCardData)
     }
   }
 

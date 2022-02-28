@@ -5,6 +5,7 @@ import styled from "styled-components";
 import {CardDetailsModal} from "./components";
 import {DataContext} from "context/DataContext";
 import {IconComments} from "assets/icon-components/icon-comments";
+import {CommentCount} from './components/comment-count/comment-count';
 
 interface props {
   cardsDataProps: IColumns
@@ -12,25 +13,28 @@ interface props {
 
 export const Cards: FC<props> = ({cardsDataProps}) => {
   const [state, setState] = useState<boolean>(false)
-  const {openModal} = useContext(DataContext);
+  const {openModal, dataState} = useContext(DataContext);
+  const {cards, comments} = dataState
+
   const handleCard = (el: ICards) => {
     setState(!state)
-    openModal(el, true)
+    openModal(el.id)
   }
 
   return (
     <>
       {
-        cardsDataProps.cards.map((el: ICards) => (
+        cards.map((el: ICards) => (
+          cardsDataProps.id === el.columnID &&
           <React.Fragment key={uuidv4()}>
             <Card onClick={() => handleCard(el)}>
               <CardText>{el.cardTitle}</CardText>
-              <CommentCount>
-                <IconComments/>
-                {el.cardComment.length && <p>{el.cardComment?.length}</p>}
-              </CommentCount>
+
+
+              <CommentCount cardIdProp={cardsDataProps.id}/>
+
+
             </Card>
-            <CardDetailsModal cardProps={el} listProps={cardsDataProps}/>
           </React.Fragment>
         ))
       }
@@ -57,15 +61,4 @@ const Card = styled.div`
 `
 const CardText = styled.p`
 
-`
-const CommentCount = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 35px;
-  height: 20px;
-
-  svg {
-    fill: gray;
-  }
 `

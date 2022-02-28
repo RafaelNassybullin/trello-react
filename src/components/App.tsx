@@ -6,11 +6,11 @@ import {DataContext} from "../context/DataContext";
 
 export const App: FC = () => {
 
-  const { pushLocalData } = useContext(DataContext);
+  // const { pushLocalData } = useContext(DataContext);
 
-  useEffect(() => {
-    pushLocalData()
-  }, []);
+  // useEffect(() => {
+  //   pushLocalData()
+  // }, []);
 
   return (
     <>

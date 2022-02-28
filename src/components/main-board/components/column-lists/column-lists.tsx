@@ -5,23 +5,26 @@ import {AddList} from "./components";
 import {DataContext} from "context/DataContext";
 import styled from "styled-components";
 import {IColumns} from "interfaces";
+import {CardDetailsModal} from './components/lists/components/cards/components';
 
 export const ColumnLists: FC = () => {
 
   const authorName: string | null = localStorage.getItem('name');
-  const { dataState } = useContext(DataContext);
-  const { mainData } = dataState
+
+  const {dataState} = useContext(DataContext);
+  const {columns} = dataState
 
   return (
     <>
       {authorName &&
-        <>
-          <AuthorTitle>{authorName}</AuthorTitle>
-          <ListWrap>
-            {mainData.map((el: IColumns) => <Lists key={uuidv4()} listsDataProps={el}/>)}
-            <AddList/>
-          </ListWrap>
-        </>}
+      <>
+        <AuthorTitle>{authorName}</AuthorTitle>
+        <ListWrap>
+          {columns.map((el: IColumns) => <Lists key={uuidv4()} listsDataProps={el}/>)}
+          <AddList/>
+        </ListWrap>
+        <CardDetailsModal/>
+      </>}
     </>
   )
 }

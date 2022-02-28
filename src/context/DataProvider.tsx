@@ -5,10 +5,10 @@ import { DataReducer } from "./dataReducer";
 import { ICards, IColumns, IColumnsState, IComment } from 'interfaces';
 
 const INITIAL_STATE: IColumnsState = {
-  mainData:[],
-  columns:[...columns],
-  cards:[...cards],
-  comments:[...comments],
+  columns:[ ...columns ],
+  cards:[ ...cards ],
+  comments:[ ...comments ],
+  modalCardID:''
 }
 
 interface props {children: JSX.Element | JSX.Element[]}
@@ -16,10 +16,6 @@ interface props {children: JSX.Element | JSX.Element[]}
 export const DataProvider = ({ children }: props) => {
 
   const [dataState, dispatch] = useReducer(DataReducer, INITIAL_STATE);
-
-  const pushLocalData = ( ) => {
-    dispatch({type: 'PUSH_LOCAL_DATA'})
-  }
 
   const addList = ( newList: IColumns ) => {
     dispatch({type: 'ADD_NEW_LIST', payload: newList})
@@ -33,28 +29,32 @@ export const DataProvider = ({ children }: props) => {
     dispatch({type: 'ADD_CARD', payload: {card, list}})
   }
 
-  const openModal = ( card:ICards|undefined , list:boolean ) => {
-    dispatch({type: 'OPEN_MODAL', payload: {card, list}})
+  const openModal = (cardID:string) => {
+    dispatch({type: 'OPEN_MODAL', payload:{ cardID }})
+  }
+
+  const closeModal = () => {
+    dispatch({type: 'CLOSE_MODAL'})
   }
 
   const removeComment = (comment:IComment , list: IColumns, card:ICards) => {
     dispatch({type: 'REMOVE_COMMENT', payload: {comment, list, card}})
   }
 
-  const changeDescriptions = ( descriptionValue: string , list: IColumns, card: ICards) => {
-    dispatch({type: 'CHANGE_DESCRIPTIONS', payload: { descriptionValue , list, card }})
+  const changeDescriptions = ( descriptionValue: string ,  card: ICards) => {
+    dispatch({type: 'CHANGE_DESCRIPTIONS', payload: { descriptionValue , card }})
   }
 
-  const changeCardTitles = ( titleValue:string, list: IColumns, card: ICards) => {
-    dispatch({type: 'CHANGE_CARD_TITLES', payload: { titleValue, list, card }})
+  const changeCardTitles = ( titleValue:string, card: ICards) => {
+    dispatch({type: 'CHANGE_CARD_TITLES', payload: { titleValue, card }})
   }
 
   const addComment = ( commentValue:IComment, list: IColumns, card: ICards) => {
     dispatch({type: 'ADD_COMMENT', payload: { commentValue, list, card }})
   }
 
-  const removeCard = (list: IColumns, card: ICards) => {
-    dispatch({type: 'REMOVE_CARD', payload: { list,  card }})
+  const removeCard = ( card: ICards ) => {
+    dispatch({type: 'REMOVE_CARD', payload: { card }})
   }
 
   const removeList = ( list: IColumns) => {
@@ -65,10 +65,10 @@ export const DataProvider = ({ children }: props) => {
     <DataContext.Provider value={{
       dataState,
       addList,
-      pushLocalData,
       changeListTitle,
       addCards,
       openModal,
+      closeModal,
       removeComment,
       changeDescriptions,
       changeCardTitles,

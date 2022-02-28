@@ -5,18 +5,16 @@ import {ICards, IColumns} from "interfaces";
 import {IconDelete} from "assets/icon-components/icon-delete";
 
 interface props {
-  listsData: IColumns
   cardData: ICards
 }
-export const RemoveCard: FC<props> = ({listsData, cardData}) => {
+export const RemoveCard: FC<props> = ({ cardData}) => {
 
-  const {openModal, removeCard, dataState} = useContext(DataContext);
-  const {mainData} = dataState
+  const { removeCard, closeModal } = useContext(DataContext);
 
   const removeCardHandler = () => {
-    openModal(cardData, false)
-    removeCard(listsData, cardData)
-    localStorage.setItem('localData', JSON.stringify(mainData))
+    removeCard(cardData)
+    closeModal()
+    // localStorage.setItem('localData', JSON.stringify(columns))
   }
 
   return (

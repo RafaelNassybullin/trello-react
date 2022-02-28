@@ -39,7 +39,6 @@ export const Lists: FC<props> = ({listsDataProps}) => {
   )
 }
 
-
 const List = styled.div`
   position: relative;
   width: 300px;
