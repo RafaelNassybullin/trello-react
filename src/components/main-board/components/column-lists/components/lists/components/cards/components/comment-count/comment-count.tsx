@@ -1,23 +1,24 @@
 import React, {FC, useContext, useState} from 'react';
 import {IconComments} from "assets/icon-components/icon-comments";
 import styled from "styled-components";
-import {IComment} from "interfaces";
+import {ICards, IComment} from "interfaces";
 import {DataContext} from "context/DataContext";
 
 interface props {
-  cardIdProp: string
+  cardProp: ICards
 }
 
-export const CommentCount: FC<props> = ({cardIdProp}) => {
+export const CommentCount: FC<props> = ({cardProp}) => {
   const {dataState} = useContext(DataContext);
   const [commentCount, setCommentCount] = useState()
   const {comments} = dataState
-
+  const count:IComment[] = []
+  comments.filter(co => co.cardID===cardProp.id && count.push(co))
 
   return (
     <CommentCountStyle>
       <IconComments/>
-      <p>{2}</p>
+      <p>{count.length}</p>
     </CommentCountStyle>
   )
 }

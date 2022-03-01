@@ -29,11 +29,7 @@ export const Cards: FC<props> = ({cardsDataProps}) => {
           <React.Fragment key={uuidv4()}>
             <Card onClick={() => handleCard(el)}>
               <CardText>{el.cardTitle}</CardText>
-
-
-              <CommentCount cardIdProp={cardsDataProps.id}/>
-
-
+              <CommentCount cardProp={el}/>
             </Card>
           </React.Fragment>
         ))
