@@ -5,13 +5,6 @@ import {DataContext} from "../context/DataContext";
 
 
 export const App: FC = () => {
-
-  // const { pushLocalData } = useContext(DataContext);
-
-  // useEffect(() => {
-  //   pushLocalData()
-  // }, []);
-
   return (
     <>
       <GlobalStyles/>
