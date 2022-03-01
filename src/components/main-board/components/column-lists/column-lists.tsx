@@ -8,9 +8,7 @@ import {IColumns} from "interfaces";
 import {CardDetailsModal} from './components/lists/components/cards/components';
 
 export const ColumnLists: FC = () => {
-
   const authorName: string | null = localStorage.getItem('name');
-
   const {dataState} = useContext(DataContext);
   const {columns} = dataState
 

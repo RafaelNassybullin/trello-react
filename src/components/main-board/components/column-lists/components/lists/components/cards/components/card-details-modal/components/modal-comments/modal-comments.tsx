@@ -93,7 +93,7 @@ const CommentsItems = styled.div`
   margin: 5px 0;
 `
 const RemoveComment = styled.button`
-  background: gray;
+  background: #40E3B5;
   color: white;
   border-radius: 50%;
   width: 20px;
@@ -101,11 +101,14 @@ const RemoveComment = styled.button`
   outline: none;
   border: none;
   cursor: pointer;
+  &:hover{
+    background: crimson;
+  }
 `
 
 const AddComment = styled.button`
   outline: none;
-  background: gray;
+  background: #40E3B5;
   color: white;
   border: none;
   cursor: pointer;

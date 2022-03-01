@@ -42,6 +42,7 @@ const Overlay = styled.div`
   width: 100%;
   height: 100vh;
   background: rgb(0, 0, 0, 0.4);
+  backdrop-filter: blur(15px);
   display: grid;
   place-items: center;
   z-index: 25;
@@ -51,6 +52,6 @@ const Popup = styled.div`
   padding: 20px 30px;
   display: grid;
   place-items: center;
-  border-radius: 30px;
+  border-radius: 10px;
   background: white;
 `

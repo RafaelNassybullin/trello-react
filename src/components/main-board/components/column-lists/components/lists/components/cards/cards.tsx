@@ -12,12 +12,10 @@ interface props {
 }
 
 export const Cards: FC<props> = ({cardsDataProps}) => {
-  const [state, setState] = useState<boolean>(false)
   const {openModal, dataState} = useContext(DataContext);
   const {cards, comments} = dataState
 
   const handleCard = (el: ICards) => {
-    setState(!state)
     openModal(el.id)
   }
 
