@@ -2,7 +2,6 @@ import React, {FC, useContext, useState} from 'react';
 import {v4 as uuidv4} from 'uuid';
 import {ICards, IColumns} from "interfaces";
 import styled from "styled-components";
-import {CardDetailsModal} from "./components";
 import {DataContext} from "context/DataContext";
 import {IconComments} from "assets/icon-components/icon-comments";
 import {CommentCount} from './components/comment-count/comment-count';
@@ -13,7 +12,7 @@ interface props {
 
 export const Cards: FC<props> = ({cardsDataProps}) => {
   const {openModal, dataState} = useContext(DataContext);
-  const {cards, comments} = dataState
+  const {cards} = dataState
 
   const handleCard = (el: ICards) => {
     openModal(el.id)

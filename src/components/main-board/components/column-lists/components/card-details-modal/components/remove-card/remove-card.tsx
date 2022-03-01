@@ -14,7 +14,6 @@ export const RemoveCard: FC<props> = ({ cardData}) => {
   const removeCardHandler = () => {
     removeCard(cardData)
     closeModal()
-    // localStorage.setItem('localData', JSON.stringify(columns))
   }
 
   return (

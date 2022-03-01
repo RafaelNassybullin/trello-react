@@ -10,9 +10,7 @@ interface props {
 export const AddCard: FC<props> = ({listDataAddCardProps}) => {
   const [addCardOpen, setAddCardOpen] = useState<boolean>(false);
   const [cardTextValue, setCardTextValue] = useState<string>('');
-
-  const {addCards, dataState} = useContext(DataContext);
-  const {columns} = dataState
+  const {addCards} = useContext(DataContext);
 
   const addCardHandler = (e: SyntheticEvent) => {
     e.preventDefault()
@@ -25,7 +23,6 @@ export const AddCard: FC<props> = ({listDataAddCardProps}) => {
       })
     }
     setCardTextValue('')
-    localStorage.setItem('localData', JSON.stringify(columns))
     setAddCardOpen(false)
   }
 

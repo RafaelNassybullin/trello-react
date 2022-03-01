@@ -24,22 +24,18 @@ export const ModalCardNames: FC<props> = ({ modalTitleCardData}) => {
 
   return (
     <ModalCardNameForm onSubmit={changeCardTitle}>
-
       <ModalCardNameTitleWrap>
         <h3>Card name:</h3>
         <ModalCardNameButton onClick={changeCardTitle}>
           <IconEdit/>
         </ModalCardNameButton>
       </ModalCardNameTitleWrap>
-
       {!cardTitleChangeOpen && <p>{modalTitleCardData.cardTitle}</p>}
-
       {cardTitleChangeOpen && <ModalCardNameInput
         type="text"
         onBlur={changeCardTitle}
         onChange={e => setCardTitleValue(e.target.value)}
         autoFocus/>}
-
     </ModalCardNameForm>
   )
 }

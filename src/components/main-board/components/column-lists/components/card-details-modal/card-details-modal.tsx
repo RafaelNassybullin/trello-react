@@ -3,10 +3,10 @@ import {ModalPopup} from "components/modal-popup";
 import {ICards, IColumns} from "interfaces";
 import styled from "styled-components";
 import {DataContext} from "context/DataContext";
-import {ModalCardNames} from "./components";
-import {ModalCardDescriptions} from "./components";
-import {ModalComments} from "./components";
-import {RemoveCard} from "./components";
+import {ModalCardNames} from "components/main-board/components/column-lists/components/card-details-modal/components";
+import {ModalCardDescriptions} from "components/main-board/components/column-lists/components/card-details-modal/components";
+import {ModalComments} from "components/main-board/components/column-lists/components/card-details-modal/components";
+import {RemoveCard} from "components/main-board/components/column-lists/components/card-details-modal/components";
 import {IconClose} from "assets/icon-components/icon-close";
 import {v4 as uuidv4} from 'uuid';
 

@@ -7,7 +7,6 @@ import {IconEdit} from "assets/icon-components/icon-edit";
 
 interface props {
   modalDescriptionCardData: ICards
-  // modalDescriptionListData: IColumns
 }
 
 export const ModalCardDescriptions: FC<props> = ({ modalDescriptionCardData }) => {
@@ -24,20 +23,16 @@ export const ModalCardDescriptions: FC<props> = ({ modalDescriptionCardData }) =
 
   return (
     <ModalCardDescription>
-
       <ModalCardDescriptionWrap>
         <ModalCardDescriptionTitle>Description</ModalCardDescriptionTitle>
         <ModalCardNameButton onClick={changeDescription}>
           <IconEdit/>
         </ModalCardNameButton>
       </ModalCardDescriptionWrap>
-
       {descriptionOpen && <ModalCardDescriptionInput onChange={e => setDescriptionValue(e.target.value)} onBlur={changeDescription} autoFocus/>}
-
       {!descriptionOpen && <DescriptionBlock onClick={changeDescription}>
         <p>{modalDescriptionCardData.cardDescription}</p>
       </DescriptionBlock>}
-
     </ModalCardDescription>
   )
 }
