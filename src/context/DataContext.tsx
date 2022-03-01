@@ -8,10 +8,10 @@ export type DataContextProps = {
   addCards:(card:ICards, list:IColumns)=>void
   openModal:(cardID:string)=>void
   closeModal:()=>void
-  removeComment:(comment:IComment , list: IColumns, card:ICards)=>void
+  removeComment:(comment:IComment)=>void
   changeDescriptions:(descriptionValue: string ,  card: ICards)=>void
   changeCardTitles:(titleValue:string, card: ICards)=>void
-  addComment:(commentValue:IComment, list: IColumns, card: ICards)=>void
+  addComment:(commentValue:IComment)=>void
   removeCard:( card: ICards )=>void
   removeList:(list: IColumns)=>void
 }

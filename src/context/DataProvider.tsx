@@ -37,8 +37,8 @@ export const DataProvider = ({ children }: props) => {
     dispatch({type: 'CLOSE_MODAL'})
   }
 
-  const removeComment = (comment:IComment , list: IColumns, card:ICards) => {
-    dispatch({type: 'REMOVE_COMMENT', payload: {comment, list, card}})
+  const removeComment = (comment:IComment) => {
+    dispatch({type: 'REMOVE_COMMENT', payload: {comment}})
   }
 
   const changeDescriptions = ( descriptionValue: string ,  card: ICards) => {
@@ -49,8 +49,8 @@ export const DataProvider = ({ children }: props) => {
     dispatch({type: 'CHANGE_CARD_TITLES', payload: { titleValue, card }})
   }
 
-  const addComment = ( commentValue:IComment, list: IColumns, card: ICards) => {
-    dispatch({type: 'ADD_COMMENT', payload: { commentValue, list, card }})
+  const addComment = ( commentValue:IComment) => {
+    dispatch({type: 'ADD_COMMENT', payload: { commentValue }})
   }
 
   const removeCard = ( card: ICards ) => {

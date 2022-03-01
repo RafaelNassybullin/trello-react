@@ -66,7 +66,17 @@ export const comments:IComment[] = [
   },
   {
     id: 'comment-2',
-    cardID: 'card-4',
+    cardID: 'card-1',
     commentText:'Коментарий-2'
+  },
+  {
+    id: 'comment-3',
+    cardID: 'card-4',
+    commentText:'Коментарий-3'
+  },
+  {
+    id: 'comment-4',
+    cardID: 'card-4',
+    commentText:'Коментарий-4'
   }
 ]

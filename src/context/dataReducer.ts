@@ -6,10 +6,10 @@ type DataAction =
   | { type: 'ADD_CARD', payload: { card: ICards, list: IColumns } }
   | { type: 'OPEN_MODAL', payload: { cardID: string } }
   | { type: 'CLOSE_MODAL' }
-  | { type: 'REMOVE_COMMENT', payload: { comment: IComment, list: IColumns, card: ICards, } }
+  | { type: 'REMOVE_COMMENT', payload: { comment: IComment } }
   | { type: 'CHANGE_DESCRIPTIONS', payload: { descriptionValue: string, card: ICards } }
   | { type: 'CHANGE_CARD_TITLES', payload: { titleValue: string, card: ICards } }
-  | { type: 'ADD_COMMENT', payload: { commentValue: IComment, list: IColumns, card: ICards } }
+  | { type: 'ADD_COMMENT', payload: { commentValue: IComment } }
   | { type: 'REMOVE_CARD', payload: { card: ICards } }
   | { type: 'REMOVE_LIST', payload: { list: IColumns } }
 
@@ -42,34 +42,10 @@ export const DataReducer = (state: IColumnsState, action: DataAction): IColumnsS
       return {
         ...state, modalCardID: ''
       }
-    // case 'REMOVE_COMMENT':
-    //   return {
-    //     ...state,
-    //     columns: state.columns.map((el: IColumns) => ({
-    //       ...el,
-    //       cards: el.cards.map((el: ICards) => ({
-    //         ...el,
-    //         cardComment: el.cardComment.filter((el: IComment) => {
-    //             return el.id !== action.payload.comment.id
-    //           }
-    //         )
-    //       }))
-    //     }))
-    //   }
-    // case 'CHANGE_DESCRIPTIONS':
-    //   return {
-    //     ...state, columns:
-    //       state.columns.map(({...el}) => {
-    //         if (el.id === action.payload.list.id) {
-    //           el.cards.map((el: ICards) => {
-    //               if (el.id === action.payload.card.id)
-    //                 el.cardDescription = action.payload.descriptionValue
-    //             }
-    //           )
-    //         }
-    //         return el
-    //       })
-    //   }
+    case 'REMOVE_COMMENT':
+      return {
+        ...state, comments: state.comments.filter(co => co.id !== action.payload.comment.id)
+      }
     case 'CHANGE_DESCRIPTIONS':
       return {
         ...state, cards: state.cards.map(el => {
@@ -88,20 +64,11 @@ export const DataReducer = (state: IColumnsState, action: DataAction): IColumnsS
           return el
         })
       }
-    // case 'ADD_COMMENT':
-    //   return {
-    //     ...state, columns:
-    //       state.columns.map(({...el}) => {
-    //         if (el.id === action.payload.list.id) {
-    //           el.cards.map((el) => {
-    //               if (el.id === action.payload.card.id)
-    //                 el.cardComment.unshift(action.payload.commentValue)
-    //             }
-    //           )
-    //         }
-    //         return el
-    //       })
-    //   }
+    case 'ADD_COMMENT':
+      return {
+        ...state, comments: [...state.comments, action.payload.commentValue]
+
+      }
     case 'REMOVE_CARD':
       return {...state, cards: state.cards.filter(el => el.id !== action.payload.card.id)}
     case 'REMOVE_LIST':

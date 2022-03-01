@@ -12,7 +12,7 @@ import {v4 as uuidv4} from 'uuid';
 
 export const CardDetailsModal: FC = () => {
   const {openModal, closeModal, dataState} = useContext(DataContext);
-  const {modalCardID, cards} = dataState
+  const {modalCardID, cards, comments} = dataState
 
   const closeHandler = () => {
     closeModal()
@@ -25,28 +25,18 @@ export const CardDetailsModal: FC = () => {
           if (ei.id === modalCardID) {
             return (
               <ModalInner key={uuidv4()}>
-
-
                 <ModalTitle>
                   <div>Author: <span>{localStorage.getItem('name')}</span></div>
                   <div>list name: <span>{ei.cardTitle}</span></div>
                 </ModalTitle>
-
                 <ModalClose onClick={closeHandler}>
                   <IconClose/>
                 </ModalClose>
-
                 <ModalCard>
-
-
-                  <ModalCardNames modalTitleCardData={ei} />
-                  <ModalCardDescriptions modalDescriptionCardData={ei} />
-
-                {/*  <ModalComments commentsCardProps={cardProps} commentsListProps={listProps}/>*/}
-
-
+                  <ModalCardNames modalTitleCardData={ei}/>
+                  <ModalCardDescriptions modalDescriptionCardData={ei}/>
+                  <ModalComments commentsCardProps={ei}/>
                 </ModalCard>
-
                 <RemoveCard cardData={ei}/>
               </ModalInner>
             )
@@ -56,7 +46,6 @@ export const CardDetailsModal: FC = () => {
     </>
   )
 }
-
 
 const ModalInner = styled.div`
   width: 600px;

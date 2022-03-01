@@ -6,32 +6,29 @@ import {DataContext} from "context/DataContext";
 
 interface props {
   commentsCardProps: ICards
-  commentsListProps: IColumns
 }
 
-export const ModalComments: FC<props> = ({commentsCardProps, commentsListProps}) => {
+export const ModalComments: FC<props> = ({commentsCardProps}) => {
   const [addCommentOpen, setAddCommentOpen] = useState(false);
   const [commentValue, setCommentValue] = useState('');
+  const {removeComment, addComment, dataState} = useContext(DataContext);
+  const {comments} = dataState
 
-  const {removeComment, addComment} = useContext(DataContext);
-
-  const addCommentsHandler = (el: IComment) => {
+  const removeHandler = (co: IComment) => {
     setAddCommentOpen(!addCommentOpen)
-    removeComment(el, commentsListProps, commentsCardProps)
+    removeComment(co)
     setCommentValue('')
   }
-
   const addCommenHandler = () => {
     setAddCommentOpen(!addCommentOpen)
     if (commentValue) {
       addComment({
         id: uuidv4(),
-        cardID:'',
+        cardID: commentsCardProps.id,
         commentText: commentValue
-      }, commentsListProps, commentsCardProps)
+      })
     }
   }
-
   return (
     <Comments>
       <CommentsTitle>Comments</CommentsTitle>
@@ -44,16 +41,18 @@ export const ModalComments: FC<props> = ({commentsCardProps, commentsListProps})
         />
         <AddComment onClick={addCommenHandler}>PUSH</AddComment>
       </CommentsAddWrap>
-
       <CommentsItemsWrap>
-        {/*{commentsCardProps.cardComment.map((el: IComment) =>*/}
-        {/*  <CommentsItems key={uuidv4()}>*/}
-        {/*    <CommentTitle>{el.commentText}</CommentTitle>*/}
-        {/*    <RemoveComment onClick={() => addCommentsHandler(el)}>X</RemoveComment>*/}
-        {/*  </CommentsItems>*/}
-        {/*)}*/}
+        {comments.map(co => {
+          if (co.cardID === commentsCardProps.id) {
+            return (
+              <CommentsItems key={uuidv4()}>
+                <CommentTitle>{co.commentText}</CommentTitle>
+                <RemoveComment onClick={() => removeHandler(co)}>X</RemoveComment>
+              </CommentsItems>
+            )
+          }
+        })}
       </CommentsItemsWrap>
-
     </Comments>
   )
 }
@@ -75,6 +74,7 @@ const CommentsInput = styled.input`
   padding: 0 10px;
   border: 2px solid #CCCCCC;
   font-size: 16px;
+
   &:focus {
     border: 2px solid gray;
   }
