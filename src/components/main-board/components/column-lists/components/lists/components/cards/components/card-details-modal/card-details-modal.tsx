@@ -21,25 +21,39 @@ export const CardDetailsModal: FC = () => {
   return (
     <>
       {modalCardID && <ModalPopup>
-        {cards.map(ei => {
-          if (ei.id === modalCardID) {
+        {cards.map(el => {
+          if (el.id === modalCardID) {
+
+
+
+
+
             return (
               <ModalInner key={uuidv4()}>
                 <ModalTitle>
                   <div>Author: <span>{localStorage.getItem('name')}</span></div>
-                  <div>list name: <span>{ei.cardTitle}</span></div>
+                  <div>list name: <span>{el.cardTitle}</span></div>
                 </ModalTitle>
                 <ModalClose onClick={closeHandler}>
                   <IconClose/>
                 </ModalClose>
                 <ModalCard>
-                  <ModalCardNames modalTitleCardData={ei}/>
-                  <ModalCardDescriptions modalDescriptionCardData={ei}/>
-                  <ModalComments commentsCardProps={ei}/>
+                  <ModalCardNames modalTitleCardData={el}/>
+                  <ModalCardDescriptions modalDescriptionCardData={el}/>
+                  <ModalComments commentsCardProps={el}/>
                 </ModalCard>
-                <RemoveCard cardData={ei}/>
+                <RemoveCard cardData={el}/>
               </ModalInner>
             )
+
+
+
+
+
+
+
+
+
           }
         })}
       </ModalPopup>}

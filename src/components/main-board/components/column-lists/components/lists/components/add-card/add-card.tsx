@@ -22,7 +22,7 @@ export const AddCard: FC<props> = ({listDataAddCardProps}) => {
         columnID: listDataAddCardProps.id,
         cardTitle: cardTextValue,
         cardDescription: 'Описание'
-      }, listDataAddCardProps)
+      })
     }
     setCardTextValue('')
     localStorage.setItem('localData', JSON.stringify(columns))

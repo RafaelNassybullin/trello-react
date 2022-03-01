@@ -3,7 +3,7 @@ import {ICards, IColumns, IColumnsState, IComment} from "interfaces";
 type DataAction =
   | { type: 'ADD_NEW_LIST', payload: IColumns }
   | { type: 'CHANGE_LIST_TITLE', payload: { id: string, value: string } }
-  | { type: 'ADD_CARD', payload: { card: ICards, list: IColumns } }
+  | { type: 'ADD_CARD', payload: { card: ICards} }
   | { type: 'OPEN_MODAL', payload: { cardID: string } }
   | { type: 'CLOSE_MODAL' }
   | { type: 'REMOVE_COMMENT', payload: { comment: IComment } }
